@@ -88,16 +88,18 @@ async function init() {
 // =============================================
 // Filters
 // =============================================
+function getGenres(v) {
+  if (!v.genres) return [];
+  return String(v.genres).split(',').map(g => g.trim()).filter(Boolean);
+}
+
 function populateFilters() {
-  const genres   = new Set();
+  const genres    = new Set();
   const countries = new Set();
-  const decades  = new Set();
+  const decades   = new Set();
 
   for (const v of allVinyls) {
-    if (v.genres) {
-      const genreList = Array.isArray(v.genres) ? v.genres : [v.genres];
-      for (const g of genreList) if (g) genres.add(g.trim());
-    }
+    for (const g of getGenres(v)) genres.add(g);
     if (v.country) countries.add(v.country.trim());
     if (v.released) {
       const decade = Math.floor(Number(v.released) / 10) * 10;
@@ -109,7 +111,7 @@ function populateFilters() {
   fillSelect('countryFilter', [...countries].sort(), v => v, v => v);
   fillSelect('decadeFilter',
     [...decades].sort((a, b) => a - b),
-    d => `${d}erne`,
+    d => `${d}'erne`,
     d => String(d)
   );
 }
@@ -144,18 +146,13 @@ function filterAndSort() {
     if (query) {
       const artist = (v.artist || '').toLowerCase();
       const title  = (v.albumTitle || '').toLowerCase();
-      const genres = Array.isArray(v.genres)
-        ? v.genres.join(' ').toLowerCase()
-        : (v.genres || '').toLowerCase();
+      const genres = getGenres(v).join(' ').toLowerCase();
       if (!artist.includes(query) && !title.includes(query) && !genres.includes(query)) {
         return false;
       }
     }
     // Genre
-    if (genre) {
-      const vGenres = Array.isArray(v.genres) ? v.genres : [v.genres || ''];
-      if (!vGenres.some(g => g && g.trim() === genre)) return false;
-    }
+    if (genre && !getGenres(v).includes(genre)) return false;
     // Country
     if (country && (v.country || '').trim() !== country) return false;
     // Decade
@@ -232,8 +229,8 @@ function renderCard(v) {
   const country      = escapeHtml(v.country || '');
   const catno        = escapeHtml(v.catNo || '');
   const shelf        = escapeHtml(String(v.shelf || ''));
-  const genreList    = Array.isArray(v.genres) ? v.genres : (v.genres ? [v.genres] : []);
-  const genreDisplay = escapeHtml(genreList[0] || '');
+  const genres       = getGenres(v);
+  const genreDisplay = genres.map(g => `<span class="card-genre">${escapeHtml(g)}</span>`).join('');
   const displayPrice = getDisplayPrice(v.discogsPrice || 0);
   const inBasket     = basket.includes(v.id);
 
@@ -252,7 +249,7 @@ function renderCard(v) {
   <div class="card-artist">${artist}</div>
   <div class="card-title">${title}</div>
   ${meta ? `<div class="card-meta">${meta}</div>` : ''}
-  ${genreDisplay ? `<div class="card-genre">${genreDisplay}</div>` : ''}
+  ${genreDisplay ? `<div class="card-genres">${genreDisplay}</div>` : ''}
   ${catno ? `<div class="card-catno">${catno}</div>` : ''}
   <div class="card-footer">
     ${shelf ? `<span class="card-shelf">Hylde ${shelf}</span>` : '<span></span>'}
@@ -464,6 +461,20 @@ function generateOrderText(name, email, phone, delivery) {
 }
 
 // =============================================
+// Reset filters
+// =============================================
+function resetFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('genreFilter').value = '';
+  document.getElementById('countryFilter').value = '';
+  document.getElementById('decadeFilter').value = '';
+  document.getElementById('minPrice').value = '';
+  document.getElementById('maxPrice').value = '';
+  document.getElementById('sortSelect').value = 'artist-az';
+  filterAndSort();
+}
+
+// =============================================
 // Event listeners
 // =============================================
 function bindEvents() {
@@ -475,6 +486,9 @@ function bindEvents() {
   document.getElementById('minPrice').addEventListener('input', filterAndSort);
   document.getElementById('maxPrice').addEventListener('input', filterAndSort);
   document.getElementById('sortSelect').addEventListener('change', filterAndSort);
+
+  // Reset filters
+  document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
 
   // Load more
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
