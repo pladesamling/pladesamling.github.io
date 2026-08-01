@@ -1125,7 +1125,7 @@
     "discogsPrice": 56.5,
     "shelf": "Jazz kasse 3",
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 95,
@@ -1137,7 +1137,7 @@
     "discogsPrice": 183.5,
     "shelf": 38,
     "genres": "Jazz",
-    "status": "available"
+    "status": "reserved"
   },
   {
     "id": 96,
@@ -1149,7 +1149,7 @@
     "discogsPrice": 108.5,
     "shelf": 38,
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 97,
@@ -5421,7 +5421,7 @@
     "discogsPrice": 54.0,
     "shelf": "Jazz kasse 3",
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 453,
@@ -5877,7 +5877,7 @@
     "discogsPrice": 54.25,
     "shelf": "se recordscanner",
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 491,
@@ -6729,7 +6729,7 @@
     "discogsPrice": 78.0,
     "shelf": "Jazz kasse 6",
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 562,
@@ -14289,7 +14289,7 @@
     "discogsPrice": 61.5,
     "shelf": 32,
     "genres": "Jazz, Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1192,
@@ -15153,7 +15153,7 @@
     "discogsPrice": 41.0,
     "shelf": 37,
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1264,
@@ -16089,7 +16089,7 @@
     "discogsPrice": 103.5,
     "shelf": "Jazz kasse 3",
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1342,
@@ -17133,7 +17133,7 @@
     "discogsPrice": 40.0,
     "shelf": "Diverse kasse",
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1429,
@@ -22293,7 +22293,7 @@
     "discogsPrice": 69.75,
     "shelf": 38,
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1859,
@@ -25917,7 +25917,7 @@
     "discogsPrice": 36.75,
     "shelf": 37,
     "genres": "Jazz",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2161,
