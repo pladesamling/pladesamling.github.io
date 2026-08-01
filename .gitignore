@@ -11,3 +11,8 @@ plan/
 
 # Source data files — only data/vinyls.json is needed on the site
 context/
+
+# Local test output and dependencies
+node_modules/
+test-results/
+playwright-report/
