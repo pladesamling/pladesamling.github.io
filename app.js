@@ -343,7 +343,7 @@ function renderCard(vinyl) {
   const year = vinyl.released ? escapeHtml(vinyl.released) : '';
   const country = escapeHtml(normalizeCountry(vinyl.country));
   const catNo = escapeHtml(vinyl.catNo || '');
-  const shelf = vinyl.shelf == null || vinyl.shelf === '' ? '' : escapeHtml(vinyl.shelf);
+  const shelf = vinyl.shelf == null || vinyl.shelf === '' ? '—' : escapeHtml(vinyl.shelf);
   const genres = getGenres(vinyl);
   const genreDisplay = genres.map(value => `<span class="card-genre">${escapeHtml(value)}</span>`).join('');
   const displayPriceOre = getDisplayPriceOre(vinyl.discogsPrice);
@@ -357,9 +357,17 @@ function renderCard(vinyl) {
   <div class="card-meta">${meta}</div>
   ${genreDisplay ? `<div class="card-genres">${genreDisplay}</div>` : ''}
   ${catNo ? `<div class="card-catno">${catNo}</div>` : ''}
+  <div class="card-details">
+    <div><span>Discogs-pris</span><strong>${formatPriceOre(priceToOre(vinyl.discogsPrice))}</strong></div>
+    <div><span>Hylde</span><strong>${shelf}</strong></div>
+    <div><span>Pladenummer</span><strong>#${id}</strong></div>
+    <div><span>Katalognummer</span><strong>${catNo || '—'}</strong></div>
+  </div>
   <div class="card-footer">
-    ${shelf ? `<span class="card-shelf">Hylde ${shelf}</span>` : '<span></span>'}
-    <span class="card-price">${formatPriceOre(displayPriceOre)}</span>
+    <span class="card-price-wrap">
+      <span class="card-price-label">Efter 15% rabat</span>
+      <span class="card-price">${formatPriceOre(displayPriceOre)}</span>
+    </span>
     <button class="btn-primary${inBasket ? ' in-basket' : ''}" type="button" data-action="add" data-id="${id}" ${inBasket ? 'disabled' : ''}>${inBasket ? 'I kurven ✓' : 'Læg i kurv'}</button>
   </div>
 </article>`.trim();
@@ -685,6 +693,11 @@ function bindEvents() {
   document.getElementById('decadeFilter').addEventListener('change', filterAndSort);
   document.getElementById('sortSelect').addEventListener('change', filterAndSort);
   document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
+  document.getElementById('detailedViewBtn').addEventListener('click', event => {
+    const grid = document.getElementById('vinylGrid');
+    const isDetailed = grid.classList.toggle('detailed');
+    event.currentTarget.setAttribute('aria-pressed', String(isDetailed));
+  });
   document.getElementById('filterToggleBtn').addEventListener('click', event => {
     const filterRow = document.getElementById('filterRow');
     const isOpen = filterRow.classList.toggle('open');

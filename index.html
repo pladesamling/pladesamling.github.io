@@ -70,6 +70,10 @@
         <h2>Find din næste plade</h2>
         <p>Søg blandt hele samlingen, eller gå på opdagelse efter genre, land og årti.</p>
       </div>
+      <aside class="discount-banner" aria-label="Rabat på alle plader">
+        <strong><span>15%</span> rabat på alle plader</strong>
+        <p>Priserne i kataloget er allerede fratrukket rabatten. Køber du 5 eller flere, får du også mængderabat.</p>
+      </aside>
       <div class="catalogue-tools">
         <div class="catalogue-controls">
           <div class="search-bar">
@@ -102,7 +106,12 @@
             <button class="btn-reset" id="resetFiltersBtn" type="button" aria-label="Nulstil filtre">Nulstil</button>
           </div>
         </div>
-        <p class="result-count" id="resultCount" aria-live="polite"></p>
+        <div class="catalogue-meta-row">
+          <p class="result-count" id="resultCount" aria-live="polite"></p>
+          <button class="view-toggle" id="detailedViewBtn" type="button" aria-pressed="false" aria-controls="vinylGrid">
+            Detaljeret visning
+          </button>
+        </div>
       </div>
       <div class="vinyl-grid" id="vinylGrid"></div>
       <div class="load-more-wrap">

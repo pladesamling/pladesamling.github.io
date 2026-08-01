@@ -12,6 +12,15 @@ test('catalogue loads without errors and uses the responsive grid', async ({ pag
   await page.goto('/');
   await expect(page.locator('#resultCount')).toHaveText('2.357 plader');
   await expect(page.locator('.vinyl-card')).toHaveCount(48);
+  await expect(page.locator('.discount-banner')).toContainText('15% rabat på alle plader');
+  await expect(page.locator('.vinyl-card').first().locator('.card-price-label')).toHaveText('Efter 15% rabat');
+  await expect(page.locator('.card-shelf')).toHaveCount(0);
+  await expect(page.locator('.vinyl-card').first().locator('.card-details')).toBeHidden();
+  await page.getByRole('button', { name: 'Detaljeret visning' }).click();
+  await expect(page.getByRole('button', { name: 'Detaljeret visning' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.vinyl-card').first().locator('.card-details')).toBeVisible();
+  await expect(page.locator('.vinyl-card').first().locator('.card-details')).toContainText('Discogs-pris');
+  await expect(page.locator('.vinyl-card').first().locator('.card-details')).toContainText('Hylde');
   await expect(page.locator('#genreCount')).toHaveText('15');
   await expect(page.getByRole('option', { name: 'Folk, World, & Country' })).toHaveCount(1);
   await expect(page.getByRole('option', { name: '& Country', exact: true })).toHaveCount(0);
@@ -125,6 +134,7 @@ test('basket and checkout preserve the order until explicit clearing', async ({ 
   await page.getByRole('button', { name: 'Generér bestilling' }).click();
 
   await expect(page.locator('#orderText')).toHaveValue(/#\d+.*Kat\.nr\./s);
+  await expect(page.locator('#orderText')).toHaveValue(/Hylde/);
   await expect(page.locator('#orderText')).toHaveValue(/Besked:\nHvad er standen\?/);
   await expect(page.locator('#basketCount')).toHaveText('1');
 
