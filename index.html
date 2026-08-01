@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pladesamling — LP'er der fortjener et nyt hjem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">Pladesamling</div>
+      <button class="basket-btn" id="basketBtn" aria-label="Åbn kurv">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="basket-count" id="basketCount" aria-live="polite">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">EN LIVSLANG SAMLING · 1954–2024</p>
+      <h1 class="hero-title">LP'er der fortjener et nyt hjem</h1>
+      <p class="hero-body">
+        Gennem et langt liv samlede og lyttede min svoger bredt — fra jazzens store navne til rockens klassikere, fra dansktop til soul og classical. 1.041 forskellige kunstnere, 17 genrer, syv årtier på hylderne. Standen varierer, som den gør efter et langt liv med musik: nogle plader er godt brugte og tydeligt elskede, andre står stadig uåbnede i cellofanen. Gennemgå listen, og giv en af dem et nyt hjem.
+      </p>
+      <p class="hero-shipping">
+        Afhentning er gratis, eller vi sender mod betaling af porto — pakker sendes hver søndag.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">2.357</span>
+          <span class="stat-label">plader</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">17</span>
+          <span class="stat-label">genrer</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1954–2024</span>
+          <span class="stat-label">årgange</span>
+        </div>
+      </div>
+      <p class="hero-disclaimer">
+        Priser er sat ned i forhold til Discogs vinter 2024, og der er automatisk mængderabat i kurven.
+      </p>
+    </div>
+  </section>
+
+  <!-- CATALOGUE -->
+  <section class="catalogue" id="catalogue">
+    <div class="catalogue-inner">
+      <div class="search-bar">
+        <input type="search" id="searchInput" placeholder="Søg efter kunstner, album eller genre…" aria-label="Søg i katalog" />
+      </div>
+      <div class="filter-row">
+        <select id="genreFilter" aria-label="Filtrer på genre">
+          <option value="">Alle genrer</option>
+        </select>
+        <select id="countryFilter" aria-label="Filtrer på land">
+          <option value="">Alle lande</option>
+        </select>
+        <select id="decadeFilter" aria-label="Filtrer på årti">
+          <option value="">Alle årtier</option>
+        </select>
+        <input type="number" id="minPrice" placeholder="Min kr" min="0" aria-label="Minimumspris" />
+        <input type="number" id="maxPrice" placeholder="Maks kr" min="0" aria-label="Maksimumspris" />
+        <select id="sortSelect" aria-label="Sortering">
+          <option value="artist-az">Kunstner A–Z</option>
+          <option value="price-asc">Pris: lavest</option>
+          <option value="price-desc">Pris: højest</option>
+          <option value="year-asc">År: ældst</option>
+          <option value="year-desc">År: nyest</option>
+        </select>
+      </div>
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+      <div class="vinyl-grid" id="vinylGrid"></div>
+      <div class="load-more-wrap">
+        <button class="btn-secondary" id="loadMoreBtn" style="display:none">Vis flere</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-inner">
+      <h2>Om os</h2>
+      <p>Vi er en familie, der sælger vores afdøde onkel Bo's store pladesamling. Musikken var hans store passion med interesse og viden om alle genrer med 4.100 LP'er.</p>
+      <p>Vi har selv taget den del af musikken til os, der giver gode minder. Vi vil gerne give pladerne videre til nogen, der vil sætte pris på dem, ligesom han gjorde.</p>
+      <p>Vi har ikke ressourcer til at sætte stand på hver enkelt plade på forkant, men lover fair pris når vi går pladerne igennem sammen.</p>
+      <p>Vi svarer så hurtigt vi kan på bestillinger og bud, og aftaler afhentning eller forsendelse individuelt med hver køber. Har du spørgsmål til en bestemt plade eller dens stand, er du velkommen til at skrive en besked, når du bestiller eller byder.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-contact">
+        <span>Kontakt:</span>
+        <a href="mailto:mellemvej12@gmail.com">mellemvej12@gmail.com</a>
+      </div>
+      <div class="footer-shipping">Pakker sendes hver søndag</div>
+      <div class="footer-discounts">
+        5–9 plader: 10% &nbsp;·&nbsp; 10–19 plader: 15% &nbsp;·&nbsp; 20+ plader: 22,5%
+      </div>
+    </div>
+  </footer>
+
+  <!-- BASKET SIDEBAR -->
+  <div class="overlay" id="basketOverlay" aria-hidden="true"></div>
+  <aside class="basket-sidebar" id="basketSidebar" aria-label="Din kurv" aria-hidden="true">
+    <div class="basket-header">
+      <h2>Din kurv</h2>
+      <button class="close-btn" id="closeBasketBtn" aria-label="Luk kurv">×</button>
+    </div>
+    <div class="basket-body" id="basketBody"></div>
+    <div class="basket-footer" id="basketFooter"></div>
+  </aside>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkoutOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <div class="modal-header">
+        <h2 id="checkoutTitle">Bestilling</h2>
+        <button class="close-btn" id="closeCheckoutBtn" aria-label="Luk bestilling">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm" novalidate>
+          <div class="form-group">
+            <label for="fieldNavn">Navn <span aria-hidden="true">*</span></label>
+            <input type="text" id="fieldNavn" required autocomplete="name" placeholder="Dit fulde navn" />
+          </div>
+          <div class="form-group">
+            <label for="fieldEmail">Email <span aria-hidden="true">*</span></label>
+            <input type="email" id="fieldEmail" required autocomplete="email" placeholder="din@email.dk" />
+          </div>
+          <div class="form-group">
+            <label for="fieldMobil">Mobil <span aria-hidden="true">*</span></label>
+            <input type="tel" id="fieldMobil" required autocomplete="tel" placeholder="+45 00 00 00 00" />
+          </div>
+          <div class="form-group">
+            <label for="fieldLevering">Levering</label>
+            <select id="fieldLevering">
+              <option value="Afhentning ønsket">Afhentning ønsket</option>
+              <option value="Forsendelse ønsket">Forsendelse ønsket</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary btn-full">Generér bestilling</button>
+        </form>
+        <div id="orderResult" style="display:none">
+          <p class="order-instructions">Kopiér teksten og send den som en email til <a href="mailto:mellemvej12@gmail.com">mellemvej12@gmail.com</a></p>
+          <textarea id="orderText" readonly rows="20" aria-label="Din bestillingstekst"></textarea>
+          <button class="btn-primary btn-full" id="copyBtn">Kopiér til udklipsholder</button>
+          <p class="copy-confirm" id="copyConfirm" aria-live="polite" style="display:none">✓ Kopieret!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
