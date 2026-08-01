@@ -136,8 +136,6 @@ function filterAndSort() {
   const genre   = document.getElementById('genreFilter').value;
   const country = document.getElementById('countryFilter').value;
   const decade  = document.getElementById('decadeFilter').value;
-  const minPrice = parseFloat(document.getElementById('minPrice').value);
-  const maxPrice = parseFloat(document.getElementById('maxPrice').value);
   const sort    = document.getElementById('sortSelect').value;
 
   let result = allVinyls.filter(v => {
@@ -159,10 +157,6 @@ function filterAndSort() {
       const d = Math.floor(Number(v.released) / 10) * 10;
       if (String(d) !== decade) return false;
     }
-    // Price
-    const dp = getDisplayPrice(v.discogsPrice || 0);
-    if (!isNaN(minPrice) && dp < minPrice) return false;
-    if (!isNaN(maxPrice) && dp > maxPrice) return false;
 
     return true;
   });
@@ -180,10 +174,16 @@ function filterAndSort() {
       result.sort((a, b) => (b.discogsPrice || 0) - (a.discogsPrice || 0));
       break;
     case 'year-asc':
-      result.sort((a, b) => (Number(a.year) || 0) - (Number(b.year) || 0));
+      result.sort((a, b) => {
+        const ya = a.released || 9999, yb = b.released || 9999;
+        return ya - yb;
+      });
       break;
     case 'year-desc':
-      result.sort((a, b) => (Number(b.year) || 0) - (Number(a.year) || 0));
+      result.sort((a, b) => {
+        const ya = a.released || 0, yb = b.released || 0;
+        return yb - ya;
+      });
       break;
   }
 
@@ -467,8 +467,6 @@ function resetFilters() {
   document.getElementById('genreFilter').value = '';
   document.getElementById('countryFilter').value = '';
   document.getElementById('decadeFilter').value = '';
-  document.getElementById('minPrice').value = '';
-  document.getElementById('maxPrice').value = '';
   document.getElementById('sortSelect').value = 'artist-az';
   filterAndSort();
 }
@@ -567,5 +565,6 @@ function bindEvents() {
 // Bootstrap
 // =============================================
 document.addEventListener('DOMContentLoaded', init);
+
 
 
