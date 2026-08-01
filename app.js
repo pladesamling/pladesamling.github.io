@@ -36,12 +36,11 @@ function escapeHtml(str) {
 
 function formatPrice(n) {
   if (n == null || isNaN(n)) return '—';
-  const rounded = Math.round(n * 100) / 100;
-  return rounded.toLocaleString('da-DK', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' kr';
+  return Math.round(n).toLocaleString('da-DK') + ' kr';
 }
 
 function getDisplayPrice(discogsPrice) {
-  return discogsPrice * (1 - BASELINE_DISCOUNT);
+  return Math.round(discogsPrice * (1 - BASELINE_DISCOUNT));
 }
 
 function getVolumeDiscount(count) {
