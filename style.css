@@ -96,7 +96,11 @@ img { max-width: 100%; display: block; }
   background: transparent;
   color: var(--accent);
   border: 1.5px solid var(--accent);
-  cursor: default;
+  cursor: pointer;
+}
+.btn-primary.in-basket:hover {
+  background: var(--accent);
+  color: #fff;
 }
 .btn-secondary {
   display: inline-flex;
@@ -298,7 +302,7 @@ a:focus-visible {
 
 .discount-banner {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 20px;
   padding: 16px 20px;
   margin-bottom: 16px;
@@ -312,6 +316,7 @@ a:focus-visible {
   color: var(--accent);
   font-family: 'Playfair Display', serif;
   font-size: 1.15rem;
+  line-height: 1.2;
   white-space: nowrap;
 }
 .discount-banner strong span {

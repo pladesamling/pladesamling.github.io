@@ -368,7 +368,7 @@ function renderCard(vinyl) {
       <span class="card-price-label">Efter 15% rabat</span>
       <span class="card-price">${formatPriceOre(displayPriceOre)}</span>
     </span>
-    <button class="btn-primary${inBasket ? ' in-basket' : ''}" type="button" data-action="add" data-id="${id}" ${inBasket ? 'disabled' : ''}>${inBasket ? 'I kurven ✓' : 'Læg i kurv'}</button>
+    <button class="btn-primary${inBasket ? ' in-basket' : ''}" type="button" data-action="${inBasket ? 'remove' : 'add'}" data-id="${id}"${inBasket ? ' aria-label="Fjern fra kurv" title="Klik for at fjerne fra kurven"' : ''}>${inBasket ? 'I kurven ✓' : 'Læg i kurv'}</button>
   </div>
 </article>`.trim();
 }
@@ -713,6 +713,7 @@ function bindEvents() {
     const action = event.target.closest('[data-action]');
     if (!action) return;
     if (action.dataset.action === 'add') addToBasket(action.dataset.id);
+    if (action.dataset.action === 'remove') removeFromBasket(action.dataset.id);
     if (action.dataset.action === 'reload') window.location.reload();
   });
 

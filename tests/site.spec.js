@@ -143,6 +143,19 @@ test('basket and checkout preserve the order until explicit clearing', async ({ 
   await expect(page.getByRole('button', { name: 'Åbn kurv' })).toBeFocused();
 });
 
+test('a catalogue card can add and remove a record from the basket', async ({ page }) => {
+  await page.goto('/');
+  const firstCard = page.locator('.vinyl-card').first();
+
+  await firstCard.getByRole('button', { name: 'Læg i kurv' }).click();
+  await expect(page.locator('#basketCount')).toHaveText('1');
+  await expect(firstCard.getByRole('button', { name: 'Fjern fra kurv' })).toHaveText('I kurven ✓');
+
+  await firstCard.getByRole('button', { name: 'Fjern fra kurv' }).click();
+  await expect(page.locator('#basketCount')).toHaveText('0');
+  await expect(firstCard.getByRole('button', { name: 'Læg i kurv' })).toBeVisible();
+});
+
 test('volume discount activates from five valid basket items', async ({ page }) => {
   await page.goto('/');
   for (let index = 0; index < 5; index += 1) {
