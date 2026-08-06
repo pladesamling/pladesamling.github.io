@@ -3009,7 +3009,7 @@
     "discogsPrice": 37.5,
     "shelf": 2,
     "genres": "Electronic",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 252,
@@ -3549,7 +3549,7 @@
     "discogsPrice": 55.0,
     "shelf": 3,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 297,
@@ -4353,7 +4353,7 @@
     "discogsPrice": 39.5,
     "shelf": 31,
     "genres": "Pop, Stage & Screen",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 364,
@@ -6213,7 +6213,7 @@
     "discogsPrice": 104.5,
     "shelf": "se recordscanner",
     "genres": "Jazz",
-    "status": "available"
+    "status": "reserved"
   },
   {
     "id": 519,
@@ -7173,7 +7173,7 @@
     "discogsPrice": 65.75,
     "shelf": "se recordscanner",
     "genres": "Rock, Funk / Soul, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 599,
@@ -7341,7 +7341,7 @@
     "discogsPrice": 94.25,
     "shelf": "se recordscanner",
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 613,
@@ -7413,7 +7413,7 @@
     "discogsPrice": 124.5,
     "shelf": "se recordscanner",
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 619,
@@ -7449,7 +7449,7 @@
     "discogsPrice": 99.25,
     "shelf": 6,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 622,
@@ -7461,7 +7461,7 @@
     "discogsPrice": 128.25,
     "shelf": "se recordscanner",
     "genres": "Pop, Folk, World, & Country",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 623,
@@ -7701,7 +7701,7 @@
     "discogsPrice": 56.5,
     "shelf": "se recordscanner",
     "genres": "Rock, Folk, World, & Country",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 643,
@@ -7713,7 +7713,7 @@
     "discogsPrice": 67.75,
     "shelf": "se recordscanner",
     "genres": "Rock, Funk / Soul, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 644,
@@ -9153,7 +9153,7 @@
     "discogsPrice": 47.25,
     "shelf": 8,
     "genres": "Electronic, Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 764,
@@ -9741,7 +9741,7 @@
     "discogsPrice": 40.0,
     "shelf": 29,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 813,
@@ -9753,7 +9753,7 @@
     "discogsPrice": 39.25,
     "shelf": 28,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 814,
@@ -9765,7 +9765,7 @@
     "discogsPrice": 38.25,
     "shelf": 28,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 815,
@@ -9777,7 +9777,7 @@
     "discogsPrice": 39.0,
     "shelf": 26,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 816,
@@ -9981,7 +9981,7 @@
     "discogsPrice": 48.0,
     "shelf": 27,
     "genres": "Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 833,
@@ -14493,7 +14493,7 @@
     "discogsPrice": 39.0,
     "shelf": 27,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1209,
@@ -20013,7 +20013,7 @@
     "discogsPrice": 36.5,
     "shelf": 25,
     "genres": "Electronic, Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1669,
@@ -22629,7 +22629,7 @@
     "discogsPrice": 56.0,
     "shelf": 3,
     "genres": "Rock, Funk / Soul, Blues",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1887,
@@ -22641,7 +22641,7 @@
     "discogsPrice": 42.5,
     "shelf": 2,
     "genres": "Blues",
-    "status": "available"
+    "status": "reserved"
   },
   {
     "id": 1888,
@@ -22653,7 +22653,7 @@
     "discogsPrice": 57.25,
     "shelf": 2,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1889,
@@ -22665,7 +22665,7 @@
     "discogsPrice": 92.75,
     "shelf": 2,
     "genres": "Rock, Funk / Soul, Blues",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1890,
@@ -26505,7 +26505,7 @@
     "discogsPrice": 52.25,
     "shelf": 19,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2210,
@@ -26541,7 +26541,7 @@
     "discogsPrice": 94.5,
     "shelf": 19,
     "genres": "Reggae",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2213,
