@@ -177,7 +177,7 @@
     "discogsPrice": 56.0,
     "shelf": 25,
     "genres": "Electronic, Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 16,
@@ -189,7 +189,7 @@
     "discogsPrice": 91.75,
     "shelf": 25,
     "genres": "Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 17,
@@ -201,7 +201,7 @@
     "discogsPrice": 39.25,
     "shelf": 25,
     "genres": "Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 18,
@@ -237,7 +237,7 @@
     "discogsPrice": 95.5,
     "shelf": 25,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 21,
@@ -249,7 +249,7 @@
     "discogsPrice": 86.25,
     "shelf": 25,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 22,
@@ -285,7 +285,7 @@
     "discogsPrice": 63.75,
     "shelf": 25,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 25,
@@ -1629,7 +1629,7 @@
     "discogsPrice": 55.25,
     "shelf": 26,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 137,
@@ -1737,7 +1737,7 @@
     "discogsPrice": 40.5,
     "shelf": 26,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 146,
@@ -1749,7 +1749,7 @@
     "discogsPrice": 38.25,
     "shelf": 26,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 147,
@@ -4833,7 +4833,7 @@
     "discogsPrice": 35.75,
     "shelf": 12,
     "genres": "Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 404,
@@ -5301,7 +5301,7 @@
     "discogsPrice": 28.0,
     "shelf": "Diverse kasse",
     "genres": "Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 443,
@@ -6957,7 +6957,7 @@
     "discogsPrice": 31.5,
     "shelf": "se recordscanner",
     "genres": "Jazz, Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 581,
@@ -7269,7 +7269,7 @@
     "discogsPrice": 62.25,
     "shelf": "se recordscanner",
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 607,
@@ -13449,7 +13449,7 @@
     "discogsPrice": 53.5,
     "shelf": 13,
     "genres": "Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1122,
@@ -13473,7 +13473,7 @@
     "discogsPrice": 51.0,
     "shelf": 13,
     "genres": "Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1124,
@@ -13785,7 +13785,7 @@
     "discogsPrice": 42.75,
     "shelf": 27,
     "genres": "Rock, Folk, World, & Country",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1150,
@@ -15573,7 +15573,7 @@
     "discogsPrice": 76.25,
     "shelf": 11,
     "genres": "Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1299,
@@ -16269,7 +16269,7 @@
     "discogsPrice": 58.75,
     "shelf": 10,
     "genres": "Electronic, Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1357,
@@ -16317,7 +16317,7 @@
     "discogsPrice": 76.5,
     "shelf": 10,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1361,
@@ -16329,7 +16329,7 @@
     "discogsPrice": 37.25,
     "shelf": 10,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1362,
@@ -18009,7 +18009,7 @@
     "discogsPrice": 41.5,
     "shelf": 29,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1502,
@@ -18033,7 +18033,7 @@
     "discogsPrice": 40.75,
     "shelf": 28,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1504,
@@ -19269,7 +19269,7 @@
     "discogsPrice": 43.5,
     "shelf": 30,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1607,
@@ -19341,7 +19341,7 @@
     "discogsPrice": 39.5,
     "shelf": 30,
     "genres": "Rock, Folk, World, & Country",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1613,
@@ -19389,7 +19389,7 @@
     "discogsPrice": 41.0,
     "shelf": 30,
     "genres": "Rock, Stage & Screen",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1617,
@@ -19905,7 +19905,7 @@
     "discogsPrice": 40.0,
     "shelf": 29,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1660,
@@ -20373,7 +20373,7 @@
     "discogsPrice": 39.5,
     "shelf": 30,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1699,
@@ -20385,7 +20385,7 @@
     "discogsPrice": 33.0,
     "shelf": 30,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1700,
@@ -20853,7 +20853,7 @@
     "discogsPrice": 50.75,
     "shelf": 20,
     "genres": "Electronic, Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1739,
@@ -21489,7 +21489,7 @@
     "discogsPrice": 35.25,
     "shelf": 20,
     "genres": "Electronic, Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1792,
@@ -21525,7 +21525,7 @@
     "discogsPrice": 43.25,
     "shelf": 17,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1795,
@@ -23505,7 +23505,7 @@
     "discogsPrice": 52.75,
     "shelf": 8,
     "genres": "Rock, Funk / Soul",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1960,
@@ -26637,7 +26637,7 @@
     "discogsPrice": 60.0,
     "shelf": 19,
     "genres": "Electronic, Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2221,
@@ -27213,7 +27213,7 @@
     "discogsPrice": 80.25,
     "shelf": 30,
     "genres": "Rock, Non-Music, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2269,
@@ -27249,7 +27249,7 @@
     "discogsPrice": 43.75,
     "shelf": 29,
     "genres": "Rock, Pop, Stage & Screen",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2272,
