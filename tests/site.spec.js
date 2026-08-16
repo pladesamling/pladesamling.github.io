@@ -145,6 +145,7 @@ test('basket and checkout preserve the order until explicit clearing', async ({ 
 
 test('mobile checkout shares the plain-text order', async ({ page }) => {
   await page.addInitScript(() => {
+    navigator.canShare = () => true;
     navigator.share = data => {
       if (window.failShare) return Promise.reject(new DOMException('Unavailable', 'NotAllowedError'));
       window.sharedOrder = data;

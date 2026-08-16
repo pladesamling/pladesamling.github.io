@@ -685,17 +685,18 @@ async function copyOrderText() {
 
 async function shareOrderText() {
   const orderText = document.getElementById('orderText');
+  const shareData = {
+    title: 'Ny bestilling',
+    text: orderText.value
+  };
 
-  if (!navigator.share) {
+  if (!navigator.share || (navigator.canShare && !navigator.canShare(shareData))) {
     copyOrderText();
     return;
   }
 
   try {
-    await navigator.share({
-      title: 'Ny bestilling',
-      text: orderText.value
-    });
+    await navigator.share(shareData);
   } catch (error) {
     if (error.name !== 'AbortError') {
       const confirmation = document.getElementById('copyConfirm');
