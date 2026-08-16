@@ -683,6 +683,29 @@ async function copyOrderText() {
   if (copied) window.setTimeout(() => { confirmation.hidden = true; }, 2500);
 }
 
+async function shareOrderText() {
+  const orderText = document.getElementById('orderText');
+  const shareData = {
+    title: 'Ny bestilling',
+    text: orderText.value
+  };
+
+  if (!navigator.share || (navigator.canShare && !navigator.canShare(shareData))) {
+    copyOrderText();
+    return;
+  }
+
+  try {
+    await navigator.share(shareData);
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      const confirmation = document.getElementById('copyConfirm');
+      confirmation.textContent = 'Deling mislykkedes – prøv at kopiere teksten i stedet.';
+      confirmation.hidden = false;
+    }
+  }
+}
+
 // =============================================
 // Events
 // =============================================
@@ -756,10 +779,10 @@ function bindEvents() {
     document.getElementById('orderText').value = generateOrderText(name, email, phone, delivery, message);
     event.currentTarget.style.display = 'none';
     document.getElementById('orderResult').style.display = '';
-    document.getElementById('copyBtn').focus();
+    document.getElementById('shareBtn').focus();
   });
 
-  document.getElementById('copyBtn').addEventListener('click', copyOrderText);
+  document.getElementById('shareBtn').addEventListener('click', shareOrderText);
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();
     document.getElementById('orderText').value = '';
