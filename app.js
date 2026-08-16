@@ -131,6 +131,7 @@ function getVinylStatus(vinyl) {
 // =============================================
 async function init() {
   bindEvents();
+  updateOrderActionUi();
   configureEmailLinks();
   loadBasket();
   document.getElementById('resultCount').textContent = 'Henter katalog…';
@@ -661,7 +662,25 @@ function generateOrderText(name, email, phone, delivery, message) {
   return lines.join('\n');
 }
 
-async function copyOrderText() {
+function shouldUsePhoneOrderAction() {
+  return window.matchMedia('(max-width: 767px)').matches;
+}
+
+function updateOrderActionUi() {
+  const isPhone = shouldUsePhoneOrderAction();
+  document.getElementById('shareBtn').textContent = isPhone ? 'Send bestillingen' : 'Kopiér til udklipsholder';
+  document.getElementById('orderInstructionsPrefix').textContent = isPhone
+    ? 'Send bestillingen direkte fra din telefon, fx som email, til '
+    : 'Kopiér teksten og send den som en email til ';
+  document.getElementById('orderInstructionsSuffix').textContent = isPhone
+    ? '. Hvis telefonens sendemuligheder ikke åbner, bliver teksten kopieret i stedet. Din kurv gemmes, indtil du selv rydder den efter afsendelse.'
+    : '. Din kurv gemmes, indtil du selv rydder den efter afsendelse.';
+}
+
+async function copyOrderText(
+  successMessage = '✓ Kopieret!',
+  failureMessage = 'Kopiering mislykkedes – markér teksten og kopiér manuelt.'
+) {
   const orderText = document.getElementById('orderText');
   let copied = false;
 
@@ -678,9 +697,10 @@ async function copyOrderText() {
   }
 
   const confirmation = document.getElementById('copyConfirm');
-  confirmation.textContent = copied ? '✓ Kopieret!' : 'Kopiering mislykkedes – markér teksten og kopiér manuelt.';
+  confirmation.textContent = copied ? successMessage : failureMessage;
   confirmation.hidden = false;
   if (copied) window.setTimeout(() => { confirmation.hidden = true; }, 2500);
+  return copied;
 }
 
 async function shareOrderText() {
@@ -691,7 +711,10 @@ async function shareOrderText() {
   };
 
   if (!navigator.share || (navigator.canShare && !navigator.canShare(shareData))) {
-    copyOrderText();
+    await copyOrderText(
+      'Kunne ikke åbne sendemulighederne – teksten er kopieret i stedet.',
+      'Kunne ikke åbne sendemulighederne – markér teksten og kopiér manuelt.'
+    );
     return;
   }
 
@@ -699,9 +722,10 @@ async function shareOrderText() {
     await navigator.share(shareData);
   } catch (error) {
     if (error.name !== 'AbortError') {
-      const confirmation = document.getElementById('copyConfirm');
-      confirmation.textContent = 'Deling mislykkedes – prøv at kopiere teksten i stedet.';
-      confirmation.hidden = false;
+      await copyOrderText(
+        'Kunne ikke åbne sendemulighederne – teksten er kopieret i stedet.',
+        'Kunne ikke åbne sendemulighederne – markér teksten og kopiér manuelt.'
+      );
     }
   }
 }
@@ -758,6 +782,7 @@ function bindEvents() {
   document.getElementById('checkoutOverlay').addEventListener('click', event => {
     if (event.target === event.currentTarget) closeCheckout();
   });
+  window.addEventListener('resize', updateOrderActionUi);
 
   ['fieldNavn', 'fieldEmail', 'fieldMobil'].forEach(id => {
     document.getElementById(id).addEventListener('input', event => {
@@ -779,10 +804,13 @@ function bindEvents() {
     document.getElementById('orderText').value = generateOrderText(name, email, phone, delivery, message);
     event.currentTarget.style.display = 'none';
     document.getElementById('orderResult').style.display = '';
+    updateOrderActionUi();
     document.getElementById('shareBtn').focus();
   });
 
-  document.getElementById('shareBtn').addEventListener('click', shareOrderText);
+  document.getElementById('shareBtn').addEventListener('click', () => (
+    shouldUsePhoneOrderAction() ? shareOrderText() : copyOrderText()
+  ));
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();
     document.getElementById('orderText').value = '';
