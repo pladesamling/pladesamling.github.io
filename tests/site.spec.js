@@ -143,6 +143,32 @@ test('basket and checkout preserve the order until explicit clearing', async ({ 
   await expect(page.getByRole('button', { name: 'Åbn kurv' })).toBeFocused();
 });
 
+test('mobile checkout shares the plain-text order', async ({ page }) => {
+  await page.addInitScript(() => {
+    navigator.share = data => {
+      window.sharedOrder = data;
+      return Promise.resolve();
+    };
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.locator('.vinyl-card').first().getByRole('button', { name: 'Læg i kurv' }).click();
+  await page.getByRole('button', { name: 'Åbn kurv' }).click();
+  await page.getByRole('button', { name: 'Gå til bestilling' }).click();
+  await page.getByLabel('Navn *').fill('Test Køber');
+  await page.getByLabel('Email *').fill('test@example.com');
+  await page.getByLabel('Mobil *').fill('+45 12 34 56 78');
+  await page.getByRole('button', { name: 'Generér bestilling' }).click();
+  const orderText = await page.locator('#orderText').inputValue();
+
+  await page.getByRole('button', { name: 'Send eller del bestillingen' }).click();
+
+  await expect.poll(() => page.evaluate(() => window.sharedOrder)).toEqual({
+    title: 'Ny bestilling',
+    text: orderText
+  });
+});
+
 test('a catalogue card can add and remove a record from the basket', async ({ page }) => {
   await page.goto('/');
   const firstCard = page.locator('.vinyl-card').first();

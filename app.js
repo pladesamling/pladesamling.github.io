@@ -683,6 +683,24 @@ async function copyOrderText() {
   if (copied) window.setTimeout(() => { confirmation.hidden = true; }, 2500);
 }
 
+async function shareOrderText() {
+  const orderText = document.getElementById('orderText');
+
+  if (!navigator.share) {
+    copyOrderText();
+    return;
+  }
+
+  try {
+    await navigator.share({
+      title: 'Ny bestilling',
+      text: orderText.value
+    });
+  } catch (error) {
+    if (error.name !== 'AbortError') copyOrderText();
+  }
+}
+
 // =============================================
 // Events
 // =============================================
@@ -760,6 +778,7 @@ function bindEvents() {
   });
 
   document.getElementById('copyBtn').addEventListener('click', copyOrderText);
+  document.getElementById('shareBtn').addEventListener('click', shareOrderText);
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();
     document.getElementById('orderText').value = '';
