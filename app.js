@@ -783,11 +783,7 @@ function bindEvents() {
   document.getElementById('checkoutOverlay').addEventListener('click', event => {
     if (event.target === event.currentTarget) closeCheckout();
   });
-  if (PHONE_ORDER_ACTION_MEDIA.addEventListener) {
-    PHONE_ORDER_ACTION_MEDIA.addEventListener('change', updateOrderActionUi);
-  } else {
-    PHONE_ORDER_ACTION_MEDIA.addListener(updateOrderActionUi);
-  }
+  PHONE_ORDER_ACTION_MEDIA.addEventListener('change', updateOrderActionUi);
 
   ['fieldNavn', 'fieldEmail', 'fieldMobil'].forEach(id => {
     document.getElementById(id).addEventListener('input', event => {
