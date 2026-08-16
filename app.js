@@ -131,6 +131,7 @@ function getVinylStatus(vinyl) {
 // =============================================
 async function init() {
   bindEvents();
+  updateOrderActionUi();
   configureEmailLinks();
   loadBasket();
   document.getElementById('resultCount').textContent = 'Henter katalog…';
@@ -662,11 +663,18 @@ function generateOrderText(name, email, phone, delivery, message) {
 }
 
 async function copyOrderText() {
+  return copyTextWithFeedback(document.getElementById('orderText').value, {
+    successMessage: '✓ Kopieret!',
+    failureMessage: 'Kopiering mislykkedes – markér teksten og kopiér manuelt.'
+  });
+}
+
+async function copyTextWithFeedback(text, { successMessage, failureMessage }) {
   const orderText = document.getElementById('orderText');
   let copied = false;
 
   try {
-    await navigator.clipboard.writeText(orderText.value);
+    await navigator.clipboard.writeText(text);
     copied = true;
   } catch {
     try {
@@ -678,9 +686,39 @@ async function copyOrderText() {
   }
 
   const confirmation = document.getElementById('copyConfirm');
-  confirmation.textContent = copied ? '✓ Kopieret!' : 'Kopiering mislykkedes – markér teksten og kopiér manuelt.';
+  confirmation.textContent = copied ? successMessage : failureMessage;
   confirmation.hidden = false;
   if (copied) window.setTimeout(() => { confirmation.hidden = true; }, 2500);
+  return copied;
+}
+
+function isPhoneContext() {
+  const isMobileUserAgent = Boolean(
+    (navigator.userAgentData && navigator.userAgentData.mobile)
+    || /Android.+Mobile|iPhone|iPod|IEMobile|Windows Phone|BlackBerry|Opera Mini|Mobile/i.test(navigator.userAgent)
+  );
+
+  return isMobileUserAgent || (window.matchMedia('(max-width: 768px)').matches && navigator.maxTouchPoints > 1);
+}
+
+function updateOrderActionUi() {
+  const isPhone = isPhoneContext();
+  const actionBtn = document.getElementById('shareBtn');
+  const instructionsLead = document.getElementById('orderInstructionsLead');
+
+  actionBtn.textContent = isPhone ? 'Del bestillingen' : 'Kopiér til udklipsholder';
+  instructionsLead.textContent = isPhone
+    ? 'Del bestillingen direkte fra din telefon. Hvis deling ikke virker, kopieres teksten, så du kan sende den som en email til'
+    : 'Kopiér bestillingen til udklipsholderen og send den som en email til';
+}
+
+async function handleOrderPrimaryAction() {
+  if (isPhoneContext()) {
+    await shareOrderText();
+    return;
+  }
+
+  await copyOrderText();
 }
 
 async function shareOrderText() {
@@ -691,7 +729,10 @@ async function shareOrderText() {
   };
 
   if (!navigator.share || (navigator.canShare && !navigator.canShare(shareData))) {
-    copyOrderText();
+    await copyTextWithFeedback(orderText.value, {
+      successMessage: 'Deling er ikke tilgængelig her – teksten er kopieret til udklipsholderen.',
+      failureMessage: 'Deling er ikke tilgængelig, og kopiering mislykkedes – markér teksten og kopiér manuelt.'
+    });
     return;
   }
 
@@ -699,9 +740,10 @@ async function shareOrderText() {
     await navigator.share(shareData);
   } catch (error) {
     if (error.name !== 'AbortError') {
-      const confirmation = document.getElementById('copyConfirm');
-      confirmation.textContent = 'Deling mislykkedes – prøv at kopiere teksten i stedet.';
-      confirmation.hidden = false;
+      await copyTextWithFeedback(orderText.value, {
+        successMessage: 'Deling mislykkedes – teksten er kopieret til udklipsholderen.',
+        failureMessage: 'Deling mislykkedes, og kopiering mislykkedes – markér teksten og kopiér manuelt.'
+      });
     }
   }
 }
@@ -777,12 +819,14 @@ function bindEvents() {
     const message = document.getElementById('fieldBesked').value.trim();
 
     document.getElementById('orderText').value = generateOrderText(name, email, phone, delivery, message);
+    updateOrderActionUi();
     event.currentTarget.style.display = 'none';
     document.getElementById('orderResult').style.display = '';
     document.getElementById('shareBtn').focus();
   });
 
-  document.getElementById('shareBtn').addEventListener('click', shareOrderText);
+  window.addEventListener('resize', updateOrderActionUi);
+  document.getElementById('shareBtn').addEventListener('click', handleOrderPrimaryAction);
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();
     document.getElementById('orderText').value = '';
