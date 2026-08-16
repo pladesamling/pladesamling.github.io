@@ -143,8 +143,35 @@ test('basket and checkout preserve the order until explicit clearing', async ({ 
   await expect(page.getByRole('button', { name: 'Åbn kurv' })).toBeFocused();
 });
 
-test('mobile checkout shares the plain-text order', async ({ page }) => {
+test('desktop checkout keeps the clipboard-only order action', async ({ page }) => {
   await page.addInitScript(() => {
+    navigator.clipboard.writeText = text => {
+      window.copiedOrder = text;
+      return Promise.resolve();
+    };
+  });
+  await page.goto('/');
+  await page.locator('.vinyl-card').first().getByRole('button', { name: 'Læg i kurv' }).click();
+  await page.getByRole('button', { name: 'Åbn kurv' }).click();
+  await page.getByRole('button', { name: 'Gå til bestilling' }).click();
+  await page.getByLabel('Navn *').fill('Test Køber');
+  await page.getByLabel('Email *').fill('test@example.com');
+  await page.getByLabel('Mobil *').fill('+45 12 34 56 78');
+  await page.getByRole('button', { name: 'Generér bestilling' }).click();
+  const orderText = await page.locator('#orderText').inputValue();
+
+  await expect(page.getByRole('button', { name: 'Kopiér til udklipsholder' })).toBeVisible();
+  await expect(page.locator('#orderInstructionsPrefix')).toHaveText('Kopiér teksten og send den som en email til ');
+  await page.getByRole('button', { name: 'Kopiér til udklipsholder' }).click();
+  await expect.poll(() => page.evaluate(() => window.copiedOrder)).toBe(orderText);
+});
+
+test('mobile checkout sends the plain-text order and falls back to copying', async ({ page }) => {
+  await page.addInitScript(() => {
+    navigator.clipboard.writeText = text => {
+      window.copiedOrder = text;
+      return Promise.resolve();
+    };
     navigator.canShare = () => true;
     navigator.share = data => {
       if (window.failShare) return Promise.reject(new DOMException('Unavailable', 'NotAllowedError'));
@@ -163,7 +190,9 @@ test('mobile checkout shares the plain-text order', async ({ page }) => {
   await page.getByRole('button', { name: 'Generér bestilling' }).click();
   const orderText = await page.locator('#orderText').inputValue();
 
-  await page.getByRole('button', { name: 'Kopiér til udklipsholder' }).click();
+  await expect(page.getByRole('button', { name: 'Send bestillingen' })).toBeVisible();
+  await expect(page.locator('#orderInstructionsPrefix')).toHaveText('Send bestillingen direkte fra din telefon, fx som email, til ');
+  await page.getByRole('button', { name: 'Send bestillingen' }).click();
 
   await expect.poll(() => page.evaluate(() => window.sharedOrder)).toEqual({
     title: 'Ny bestilling',
@@ -171,8 +200,9 @@ test('mobile checkout shares the plain-text order', async ({ page }) => {
   });
 
   await page.evaluate(() => { window.failShare = true; });
-  await page.getByRole('button', { name: 'Kopiér til udklipsholder' }).click();
-  await expect(page.locator('#copyConfirm')).toHaveText('Deling mislykkedes – prøv at kopiere teksten i stedet.');
+  await page.getByRole('button', { name: 'Send bestillingen' }).click();
+  await expect.poll(() => page.evaluate(() => window.copiedOrder)).toBe(orderText);
+  await expect(page.locator('#copyConfirm')).toHaveText('Kunne ikke åbne sendemulighederne – teksten er kopieret i stedet.');
 });
 
 test('a catalogue card can add and remove a record from the basket', async ({ page }) => {
