@@ -107,6 +107,16 @@ test('mobile layout exposes the catalogue action without horizontal overflow', a
   await page.getByRole('button', { name: 'Filtre', exact: true }).click();
   await expect(page.locator('#filterRow')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Filtre', exact: true })).toHaveAttribute('aria-expanded', 'true');
+
+  await page.locator('.vinyl-card').first().getByRole('button', { name: 'Læg i kurv' }).click();
+  await page.getByRole('button', { name: 'Åbn kurv' }).click();
+  await expect(page.getByRole('button', { name: 'Gå til bestilling' })).toBeVisible();
+
+  const basketViewport = await page.locator('#basketSidebar').evaluate(element => ({
+    bottom: element.getBoundingClientRect().bottom,
+    viewportHeight: window.visualViewport?.height ?? window.innerHeight
+  }));
+  expect(basketViewport.bottom).toBeLessThanOrEqual(basketViewport.viewportHeight + 1);
 });
 
 test('search, sorting, reset and pagination work', async ({ page }) => {
@@ -224,6 +234,7 @@ test('mobile checkout opens a prefilled email and offers copy fallback', async (
   const expectedEmailHref = `mailto:mellemvej12@gmail.com?subject=${encodeURIComponent('Ny bestilling')}&body=${encodeURIComponent(orderText)}`;
   await expect(page.getByRole('link', { name: 'Åbn email med bestillingen' })).toHaveAttribute('href', expectedEmailHref);
   await expect(page.locator('#orderInstructionsPrefix')).toHaveText('Åbn en ny email til ');
+  await expect(page.getByRole('button', { name: 'Kopiér teksten i stedet' })).toHaveCSS('margin-top', '10px');
   await page.getByRole('button', { name: 'Kopiér teksten i stedet' }).click();
   await expect.poll(() => page.evaluate(() => window.copiedOrder)).toBe(orderText);
   await expect(page.locator('#copyConfirm')).toHaveText('✓ Kopieret!');
