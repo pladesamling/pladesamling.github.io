@@ -15,6 +15,7 @@ const ORDER_EMAIL = 'mellemvej12@gmail.com';
 const BASKET_STORAGE_KEY = 'pladesamling_basket';
 const COMBINED_COUNTRY_GENRE = 'Folk, World, & Country';
 const VALID_STATUSES = new Set(['available', 'reserved', 'sold']);
+const PHONE_ORDER_ACTION_MEDIA = window.matchMedia('(max-width: 767px)');
 
 // =============================================
 // State
@@ -663,7 +664,7 @@ function generateOrderText(name, email, phone, delivery, message) {
 }
 
 function shouldUsePhoneOrderAction() {
-  return window.matchMedia('(max-width: 767px)').matches;
+  return PHONE_ORDER_ACTION_MEDIA.matches;
 }
 
 function updateOrderActionUi() {
@@ -782,7 +783,11 @@ function bindEvents() {
   document.getElementById('checkoutOverlay').addEventListener('click', event => {
     if (event.target === event.currentTarget) closeCheckout();
   });
-  window.addEventListener('resize', updateOrderActionUi);
+  if (PHONE_ORDER_ACTION_MEDIA.addEventListener) {
+    PHONE_ORDER_ACTION_MEDIA.addEventListener('change', updateOrderActionUi);
+  } else {
+    PHONE_ORDER_ACTION_MEDIA.addListener(updateOrderActionUi);
+  }
 
   ['fieldNavn', 'fieldEmail', 'fieldMobil'].forEach(id => {
     document.getElementById(id).addEventListener('input', event => {
