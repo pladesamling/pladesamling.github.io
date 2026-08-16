@@ -14,6 +14,7 @@ const PAGE_SIZE = 48;
 const ORDER_EMAIL = 'mellemvej12@gmail.com';
 const BASKET_STORAGE_KEY = 'pladesamling_basket';
 const COMBINED_COUNTRY_GENRE = 'Folk, World, & Country';
+const PHONE_MAX_WIDTH_PX = 768;
 const VALID_STATUSES = new Set(['available', 'reserved', 'sold']);
 
 // =============================================
@@ -131,7 +132,6 @@ function getVinylStatus(vinyl) {
 // =============================================
 async function init() {
   bindEvents();
-  updateOrderActionUi();
   configureEmailLinks();
   loadBasket();
   document.getElementById('resultCount').textContent = 'Henter katalog…';
@@ -670,18 +670,25 @@ async function copyOrderText() {
 }
 
 async function copyTextWithFeedback(text, { successMessage, failureMessage }) {
-  const orderText = document.getElementById('orderText');
   let copied = false;
 
   try {
     await navigator.clipboard.writeText(text);
     copied = true;
   } catch {
+    const fallbackTextArea = document.createElement('textarea');
+    fallbackTextArea.value = text;
+    fallbackTextArea.setAttribute('readonly', '');
+    fallbackTextArea.style.position = 'fixed';
+    fallbackTextArea.style.opacity = '0';
+    document.body.appendChild(fallbackTextArea);
     try {
-      orderText.select();
+      fallbackTextArea.select();
       copied = document.execCommand('copy');
     } catch {
       copied = false;
+    } finally {
+      fallbackTextArea.remove();
     }
   }
 
@@ -698,7 +705,7 @@ function isPhoneContext() {
     || /Android.+Mobile|iPhone|iPod|IEMobile|Windows Phone|BlackBerry|Opera Mini|Mobile/i.test(navigator.userAgent)
   );
 
-  return isMobileUserAgent || (window.matchMedia('(max-width: 768px)').matches && navigator.maxTouchPoints > 1);
+  return isMobileUserAgent || (window.matchMedia(`(max-width: ${PHONE_MAX_WIDTH_PX}px)`).matches && navigator.maxTouchPoints > 0);
 }
 
 function updateOrderActionUi() {
@@ -825,7 +832,6 @@ function bindEvents() {
     document.getElementById('shareBtn').focus();
   });
 
-  window.addEventListener('resize', updateOrderActionUi);
   document.getElementById('shareBtn').addEventListener('click', handleOrderPrimaryAction);
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();

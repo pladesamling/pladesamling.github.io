@@ -202,6 +202,7 @@ test('desktop checkout copies the plain-text order without invoking share', asyn
       },
       configurable: true
     });
+    window.sharedOrder = null;
     navigator.canShare = () => true;
     navigator.share = data => {
       window.sharedOrder = data;
@@ -224,7 +225,7 @@ test('desktop checkout copies the plain-text order without invoking share', asyn
   await page.getByRole('button', { name: 'Kopiér til udklipsholder' }).click();
 
   await expect.poll(() => page.evaluate(() => window.copiedOrder)).toBe(orderText);
-  await expect.poll(() => page.evaluate(() => window.sharedOrder)).toBeUndefined();
+  await expect.poll(() => page.evaluate(() => window.sharedOrder)).toBe(null);
   await expect(page.locator('#copyConfirm')).toHaveText('✓ Kopieret!');
 });
 
