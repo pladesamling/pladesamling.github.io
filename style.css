@@ -84,7 +84,7 @@ img { max-width: 100%; display: block; }
   transition: background var(--transition), transform var(--transition);
   white-space: nowrap;
 }
-.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:hover { background: var(--accent-hover); text-decoration: none; }
 .btn-primary:active { transform: scale(0.97); }
 .btn-primary:disabled {
   background: var(--border);

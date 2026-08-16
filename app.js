@@ -668,13 +668,26 @@ function shouldUsePhoneOrderAction() {
 
 function updateOrderActionUi() {
   const isPhone = shouldUsePhoneOrderAction();
-  document.getElementById('shareBtn').textContent = isPhone ? 'Send bestillingen' : 'Kopiér til udklipsholder';
+  const desktopAction = document.getElementById('orderActionBtn');
+  const emailAction = document.getElementById('emailOrderLink');
+  const copyFallback = document.getElementById('copyOrderBtn');
+
+  desktopAction.hidden = isPhone;
+  emailAction.hidden = !isPhone;
+  emailAction.href = buildOrderEmailHref();
+  copyFallback.hidden = !isPhone;
   document.getElementById('orderInstructionsPrefix').textContent = isPhone
-    ? 'Send bestillingen direkte fra din telefon, fx som email, til '
+    ? 'Åbn en ny email til '
     : 'Kopiér teksten og send den som en email til ';
   document.getElementById('orderInstructionsSuffix').textContent = isPhone
-    ? '. Hvis telefonens sendemuligheder ikke åbner, bliver teksten kopieret i stedet. Din kurv gemmes, indtil du selv rydder den efter afsendelse.'
+    ? ' med modtager, emne og bestilling udfyldt. Hvis der ikke åbnes en emailapp, kan du kopiere teksten i stedet. Din kurv gemmes, indtil du selv rydder den efter afsendelse.'
     : '. Din kurv gemmes, indtil du selv rydder den efter afsendelse.';
+}
+
+function buildOrderEmailHref() {
+  const subject = encodeURIComponent('Ny bestilling');
+  const body = encodeURIComponent(document.getElementById('orderText').value);
+  return `mailto:${ORDER_EMAIL}?subject=${subject}&body=${body}`;
 }
 
 async function copyOrderText(
@@ -701,33 +714,6 @@ async function copyOrderText(
   confirmation.hidden = false;
   if (copied) window.setTimeout(() => { confirmation.hidden = true; }, 2500);
   return copied;
-}
-
-async function shareOrderText() {
-  const orderText = document.getElementById('orderText');
-  const shareData = {
-    title: 'Ny bestilling',
-    text: orderText.value
-  };
-
-  if (!navigator.share || (navigator.canShare && !navigator.canShare(shareData))) {
-    await copyOrderText(
-      'Kunne ikke åbne sendemulighederne – teksten er kopieret i stedet.',
-      'Kunne ikke åbne sendemulighederne – markér teksten og kopiér manuelt.'
-    );
-    return;
-  }
-
-  try {
-    await navigator.share(shareData);
-  } catch (error) {
-    if (error.name !== 'AbortError') {
-      await copyOrderText(
-        'Kunne ikke åbne sendemulighederne – teksten er kopieret i stedet.',
-        'Kunne ikke åbne sendemulighederne – markér teksten og kopiér manuelt.'
-      );
-    }
-  }
 }
 
 // =============================================
@@ -805,13 +791,11 @@ function bindEvents() {
     event.currentTarget.style.display = 'none';
     document.getElementById('orderResult').style.display = '';
     updateOrderActionUi();
-    document.getElementById('shareBtn').focus();
+    document.getElementById(shouldUsePhoneOrderAction() ? 'emailOrderLink' : 'orderActionBtn').focus();
   });
 
-  document.getElementById('shareBtn').addEventListener('click', async () => {
-    if (shouldUsePhoneOrderAction()) await shareOrderText();
-    else await copyOrderText();
-  });
+  document.getElementById('orderActionBtn').addEventListener('click', () => copyOrderText());
+  document.getElementById('copyOrderBtn').addEventListener('click', () => copyOrderText());
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();
     document.getElementById('orderText').value = '';
