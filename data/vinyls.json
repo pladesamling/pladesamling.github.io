@@ -1005,7 +1005,7 @@
     "discogsPrice": 36.75,
     "shelf": 26,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 85,
@@ -1665,7 +1665,7 @@
     "discogsPrice": 40.75,
     "shelf": 26,
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 140,
@@ -7389,7 +7389,7 @@
     "discogsPrice": 34.75,
     "shelf": "se recordscanner",
     "genres": "Rock, Pop",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 617,
@@ -14757,7 +14757,7 @@
     "discogsPrice": 36.25,
     "shelf": 28,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1231,
@@ -19977,7 +19977,7 @@
     "discogsPrice": 94.5,
     "shelf": 18,
     "genres": "Rock",
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1666,
