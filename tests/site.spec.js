@@ -1,6 +1,31 @@
 const { test, expect } = require('@playwright/test');
 const catalogue = require('../data/vinyls.json');
 
+const PAGE_SIZE = 48;
+const COMBINED_COUNTRY_GENRE = 'Folk, World, & Country';
+
+function getVinylStatus(vinyl) {
+  if (!vinyl.status) return vinyl.sold ? 'sold' : 'available';
+  return String(vinyl.status).toLowerCase().trim();
+}
+
+function getGenres(vinyl) {
+  if (!vinyl.genres) return [];
+
+  const token = '__FOLK_WORLD_COUNTRY__';
+  return String(vinyl.genres)
+    .replaceAll(COMBINED_COUNTRY_GENRE, token)
+    .split(',')
+    .map(genre => genre.trim().replace(token, COMBINED_COUNTRY_GENRE))
+    .filter(Boolean);
+}
+
+function formatRecordCount(count) {
+  return `${count.toLocaleString('da-DK')} ${count === 1 ? 'plade' : 'plader'}`;
+}
+
+const availableCatalogue = catalogue.filter(vinyl => getVinylStatus(vinyl) === 'available');
+
 test('catalogue loads without errors and uses the responsive grid', async ({ page }) => {
   const errors = [];
   let catalogueRequests = 0;
@@ -10,8 +35,8 @@ test('catalogue loads without errors and uses the responsive grid', async ({ pag
   });
 
   await page.goto('/');
-  await expect(page.locator('#resultCount')).toHaveText('2.357 plader');
-  await expect(page.locator('.vinyl-card')).toHaveCount(48);
+  await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(availableCatalogue.length));
+  await expect(page.locator('.vinyl-card')).toHaveCount(Math.min(PAGE_SIZE, availableCatalogue.length));
   await expect(page.locator('.discount-banner')).toContainText('15% rabat på alle plader');
   await expect(page.locator('.vinyl-card').first().locator('.card-price-label')).toHaveText('Efter 15% rabat');
   await expect(page.locator('.card-shelf')).toHaveCount(0);
@@ -21,7 +46,8 @@ test('catalogue loads without errors and uses the responsive grid', async ({ pag
   await expect(page.locator('.vinyl-card').first().locator('.card-details')).toBeVisible();
   await expect(page.locator('.vinyl-card').first().locator('.card-details')).toContainText('Discogs-pris');
   await expect(page.locator('.vinyl-card').first().locator('.card-details')).toContainText('Hylde');
-  await expect(page.locator('#genreCount')).toHaveText('15');
+  const genreCount = new Set(availableCatalogue.flatMap(getGenres)).size;
+  await expect(page.locator('#genreCount')).toHaveText(String(genreCount));
   await expect(page.getByRole('option', { name: 'Folk, World, & Country' })).toHaveCount(1);
   await expect(page.getByRole('option', { name: '& Country', exact: true })).toHaveCount(0);
 
@@ -38,9 +64,11 @@ test('catalogue loads without errors and uses the responsive grid', async ({ pag
 });
 
 test('reserved and sold records are hidden from the catalogue', async ({ page }) => {
-  const catalogueWithStatuses = catalogue.map((vinyl, index) => {
-    if (index === 0) return { ...vinyl, status: 'reserved' };
-    if (index === 1) return { ...vinyl, status: 'sold' };
+  const unavailableIds = availableCatalogue.slice(0, 2).map(vinyl => vinyl.id);
+  const catalogueWithStatuses = catalogue.map(vinyl => {
+    const unavailableIndex = unavailableIds.indexOf(vinyl.id);
+    if (unavailableIndex === 0) return { ...vinyl, status: 'reserved' };
+    if (unavailableIndex === 1) return { ...vinyl, status: 'sold' };
     return vinyl;
   });
   await page.route('**/data/vinyls.json', route => route.fulfill({
@@ -49,9 +77,10 @@ test('reserved and sold records are hidden from the catalogue', async ({ page })
   }));
 
   await page.goto('/');
-  await expect(page.locator('#resultCount')).toHaveText('2.355 plader');
-  await expect(page.locator('.vinyl-card[data-id="1"]')).toHaveCount(0);
-  await expect(page.locator('.vinyl-card[data-id="2"]')).toHaveCount(0);
+  await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(availableCatalogue.length - unavailableIds.length));
+  for (const id of unavailableIds) {
+    await expect(page.locator(`.vinyl-card[data-id="${id}"]`)).toHaveCount(0);
+  }
 });
 
 test('mobile layout exposes the catalogue action without horizontal overflow', async ({ page }) => {
@@ -81,19 +110,27 @@ test('mobile layout exposes the catalogue action without horizontal overflow', a
 });
 
 test('search, sorting, reset and pagination work', async ({ page }) => {
+  const abbaMatches = availableCatalogue.filter(vinyl =>
+    [vinyl.artist, vinyl.albumTitle, vinyl.catNo, ...getGenres(vinyl)]
+      .filter(Boolean)
+      .join(' ')
+      .toLocaleLowerCase('da-DK')
+      .includes('abba')
+  );
+
   await page.goto('/');
   await page.getByLabel('Søg i katalog').fill('ABBA');
-  await expect(page.locator('#resultCount')).not.toHaveText('2.357 plader');
-  await expect(page.locator('.vinyl-card')).toHaveCount(10);
+  await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(abbaMatches.length));
+  await expect(page.locator('.vinyl-card')).toHaveCount(Math.min(PAGE_SIZE, abbaMatches.length));
 
   await page.getByRole('button', { name: 'Nulstil filtre' }).click();
-  await expect(page.locator('#resultCount')).toHaveText('2.357 plader');
+  await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(availableCatalogue.length));
 
-  const catNoCounts = catalogue.reduce((counts, vinyl) => {
+  const catNoCounts = availableCatalogue.reduce((counts, vinyl) => {
     if (vinyl.catNo) counts[vinyl.catNo] = (counts[vinyl.catNo] || 0) + 1;
     return counts;
   }, {});
-  const uniqueCatNo = catalogue.find(vinyl => vinyl.catNo && catNoCounts[vinyl.catNo] === 1).catNo;
+  const uniqueCatNo = availableCatalogue.find(vinyl => vinyl.catNo && catNoCounts[vinyl.catNo] === 1).catNo;
   await page.getByLabel('Søg i katalog').fill(uniqueCatNo);
   await expect(page.locator('#resultCount')).toHaveText('1 plade');
   await page.getByRole('button', { name: 'Nulstil filtre' }).click();
@@ -105,7 +142,7 @@ test('search, sorting, reset and pagination work', async ({ page }) => {
   expect(firstTwoPrices[0]).toBeGreaterThanOrEqual(firstTwoPrices[1]);
 
   await page.getByRole('button', { name: /Vis flere/ }).click();
-  await expect(page.locator('.vinyl-card')).toHaveCount(96);
+  await expect(page.locator('.vinyl-card')).toHaveCount(Math.min(PAGE_SIZE * 2, availableCatalogue.length));
 });
 
 test('basket and checkout preserve the order until explicit clearing', async ({ page }) => {
@@ -166,16 +203,10 @@ test('desktop checkout keeps the clipboard-only order action', async ({ page }) 
   await expect.poll(() => page.evaluate(() => window.copiedOrder)).toBe(orderText);
 });
 
-test('mobile checkout sends the plain-text order and falls back to copying', async ({ page }) => {
+test('mobile checkout opens a prefilled email and offers copy fallback', async ({ page }) => {
   await page.addInitScript(() => {
     navigator.clipboard.writeText = text => {
       window.copiedOrder = text;
-      return Promise.resolve();
-    };
-    navigator.canShare = () => true;
-    navigator.share = data => {
-      if (window.failShare) return Promise.reject(new DOMException('Unavailable', 'NotAllowedError'));
-      window.sharedOrder = data;
       return Promise.resolve();
     };
   });
@@ -190,19 +221,12 @@ test('mobile checkout sends the plain-text order and falls back to copying', asy
   await page.getByRole('button', { name: 'Generér bestilling' }).click();
   const orderText = await page.locator('#orderText').inputValue();
 
-  await expect(page.getByRole('button', { name: 'Send bestillingen' })).toBeVisible();
-  await expect(page.locator('#orderInstructionsPrefix')).toHaveText('Send bestillingen direkte fra din telefon, fx som email, til ');
-  await page.getByRole('button', { name: 'Send bestillingen' }).click();
-
-  await expect.poll(() => page.evaluate(() => window.sharedOrder)).toEqual({
-    title: 'Ny bestilling',
-    text: orderText
-  });
-
-  await page.evaluate(() => { window.failShare = true; });
-  await page.getByRole('button', { name: 'Send bestillingen' }).click();
+  const expectedEmailHref = `mailto:mellemvej12@gmail.com?subject=${encodeURIComponent('Ny bestilling')}&body=${encodeURIComponent(orderText)}`;
+  await expect(page.getByRole('link', { name: 'Åbn email med bestillingen' })).toHaveAttribute('href', expectedEmailHref);
+  await expect(page.locator('#orderInstructionsPrefix')).toHaveText('Åbn en ny email til ');
+  await page.getByRole('button', { name: 'Kopiér teksten i stedet' }).click();
   await expect.poll(() => page.evaluate(() => window.copiedOrder)).toBe(orderText);
-  await expect(page.locator('#copyConfirm')).toHaveText('Kunne ikke åbne sendemulighederne – teksten er kopieret i stedet.');
+  await expect(page.locator('#copyConfirm')).toHaveText('✓ Kopieret!');
 });
 
 test('a catalogue card can add and remove a record from the basket', async ({ page }) => {
@@ -231,12 +255,13 @@ test('volume discount activates from five valid basket items', async ({ page }) 
 });
 
 test('unavailable IDs are removed from a saved basket', async ({ page }) => {
-  await page.addInitScript(() => {
-    localStorage.setItem('pladesamling_basket', JSON.stringify([1, 999999, 1]));
-  });
+  const availableId = Number(availableCatalogue[0].id);
+  await page.addInitScript(id => {
+    localStorage.setItem('pladesamling_basket', JSON.stringify([id, 999999, id]));
+  }, availableId);
   await page.goto('/');
   await expect(page.locator('#basketCount')).toHaveText('1');
 
   const storedBasket = await page.evaluate(() => JSON.parse(localStorage.getItem('pladesamling_basket')));
-  expect(storedBasket).toEqual([1]);
+  expect(storedBasket).toEqual([availableId]);
 });
