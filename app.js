@@ -779,10 +779,9 @@ function bindEvents() {
     document.getElementById('orderText').value = generateOrderText(name, email, phone, delivery, message);
     event.currentTarget.style.display = 'none';
     document.getElementById('orderResult').style.display = '';
-    document.getElementById('copyBtn').focus();
+    document.getElementById('shareBtn').focus();
   });
 
-  document.getElementById('copyBtn').addEventListener('click', copyOrderText);
   document.getElementById('shareBtn').addEventListener('click', shareOrderText);
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();

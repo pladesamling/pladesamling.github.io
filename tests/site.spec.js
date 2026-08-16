@@ -163,7 +163,7 @@ test('mobile checkout shares the plain-text order', async ({ page }) => {
   await page.getByRole('button', { name: 'Generér bestilling' }).click();
   const orderText = await page.locator('#orderText').inputValue();
 
-  await page.getByRole('button', { name: 'Send eller del bestillingen' }).click();
+  await page.getByRole('button', { name: 'Kopiér til udklipsholder' }).click();
 
   await expect.poll(() => page.evaluate(() => window.sharedOrder)).toEqual({
     title: 'Ny bestilling',
@@ -171,7 +171,7 @@ test('mobile checkout shares the plain-text order', async ({ page }) => {
   });
 
   await page.evaluate(() => { window.failShare = true; });
-  await page.getByRole('button', { name: 'Send eller del bestillingen' }).click();
+  await page.getByRole('button', { name: 'Kopiér til udklipsholder' }).click();
   await expect(page.locator('#copyConfirm')).toHaveText('Deling mislykkedes – prøv at kopiere teksten i stedet.');
 });
 
