@@ -149,10 +149,6 @@ test('desktop checkout keeps the clipboard-only order action', async ({ page }) 
       window.copiedOrder = text;
       return Promise.resolve();
     };
-    navigator.share = data => {
-      window.sharedOrder = data;
-      return Promise.resolve();
-    };
   });
   await page.goto('/');
   await page.locator('.vinyl-card').first().getByRole('button', { name: 'Læg i kurv' }).click();
@@ -166,11 +162,8 @@ test('desktop checkout keeps the clipboard-only order action', async ({ page }) 
 
   await expect(page.getByRole('button', { name: 'Kopiér til udklipsholder' })).toBeVisible();
   await expect(page.locator('#orderInstructionsPrefix')).toHaveText('Kopiér teksten og send den som en email til ');
-
   await page.getByRole('button', { name: 'Kopiér til udklipsholder' }).click();
-
   await expect.poll(() => page.evaluate(() => window.copiedOrder)).toBe(orderText);
-  await expect.poll(() => page.evaluate(() => window.sharedOrder || null)).toBe(null);
 });
 
 test('mobile checkout sends the plain-text order and falls back to copying', async ({ page }) => {

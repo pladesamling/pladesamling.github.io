@@ -132,7 +132,6 @@ function getVinylStatus(vinyl) {
 // =============================================
 async function init() {
   bindEvents();
-  updateOrderActionUi();
   configureEmailLinks();
   loadBasket();
   document.getElementById('resultCount').textContent = 'Henter katalog…';
@@ -809,9 +808,10 @@ function bindEvents() {
     document.getElementById('shareBtn').focus();
   });
 
-  document.getElementById('shareBtn').addEventListener('click', () => (
-    shouldUsePhoneOrderAction() ? shareOrderText() : copyOrderText()
-  ));
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    if (shouldUsePhoneOrderAction()) await shareOrderText();
+    else await copyOrderText();
+  });
   document.getElementById('clearBasketBtn').addEventListener('click', () => {
     clearBasket();
     document.getElementById('orderText').value = '';
