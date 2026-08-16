@@ -697,7 +697,11 @@ async function shareOrderText() {
       text: orderText.value
     });
   } catch (error) {
-    if (error.name !== 'AbortError') copyOrderText();
+    if (error.name !== 'AbortError') {
+      const confirmation = document.getElementById('copyConfirm');
+      confirmation.textContent = 'Deling mislykkedes – prøv at kopiere teksten i stedet.';
+      confirmation.hidden = false;
+    }
   }
 }
 

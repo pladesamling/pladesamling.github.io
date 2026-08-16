@@ -146,6 +146,7 @@ test('basket and checkout preserve the order until explicit clearing', async ({ 
 test('mobile checkout shares the plain-text order', async ({ page }) => {
   await page.addInitScript(() => {
     navigator.share = data => {
+      if (window.failShare) return Promise.reject(new DOMException('Unavailable', 'NotAllowedError'));
       window.sharedOrder = data;
       return Promise.resolve();
     };
@@ -167,6 +168,10 @@ test('mobile checkout shares the plain-text order', async ({ page }) => {
     title: 'Ny bestilling',
     text: orderText
   });
+
+  await page.evaluate(() => { window.failShare = true; });
+  await page.getByRole('button', { name: 'Send eller del bestillingen' }).click();
+  await expect(page.locator('#copyConfirm')).toHaveText('Deling mislykkedes – prøv at kopiere teksten i stedet.');
 });
 
 test('a catalogue card can add and remove a record from the basket', async ({ page }) => {
