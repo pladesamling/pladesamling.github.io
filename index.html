@@ -68,7 +68,7 @@
       <div class="catalogue-heading">
         <p class="section-eyebrow">KATALOGET</p>
         <h2>Find din næste plade</h2>
-        <p>Søg blandt hele samlingen, eller gå på opdagelse efter genre, land og årti.</p>
+        <p>Søg blandt hele samlingen, eller gå på opdagelse efter format, genre, land og årti.</p>
       </div>
       <aside class="discount-banner" aria-label="Rabat på alle plader">
         <strong><span>15%</span> rabat på alle plader</strong>
@@ -82,6 +82,10 @@
             <button class="filter-toggle" id="filterToggleBtn" type="button" aria-expanded="false" aria-controls="filterRow">Filtre</button>
           </div>
           <div class="filter-row" id="filterRow">
+            <label class="sr-only" for="formatFilter">Format</label>
+            <select id="formatFilter" aria-label="Filtrer på format">
+              <option value="">Alle formater</option>
+            </select>
             <label class="sr-only" for="genreFilter">Genre</label>
             <select id="genreFilter" aria-label="Filtrer på genre">
               <option value="">Alle genrer</option>

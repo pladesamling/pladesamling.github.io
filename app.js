@@ -112,6 +112,11 @@ function getGenres(vinyl) {
     .filter(Boolean);
 }
 
+function getFormat(vinyl) {
+  const value = vinyl.format == null ? '' : String(vinyl.format).trim();
+  return value || 'Ukendt format';
+}
+
 function normalizeCountry(country) {
   const value = country == null ? '' : String(country).trim();
   return !value || value.toLowerCase() === 'null' ? 'Unknown' : value;
@@ -204,10 +209,12 @@ function updateCatalogueStats() {
 // =============================================
 function populateFilters() {
   const genres = new Set();
+  const formats = new Set();
   const countries = new Set();
   const decades = new Set();
 
   for (const vinyl of allVinyls) {
+    formats.add(getFormat(vinyl));
     getGenres(vinyl).forEach(genre => genres.add(genre));
     countries.add(normalizeCountry(vinyl.country));
 
@@ -215,6 +222,7 @@ function populateFilters() {
     if (Number.isFinite(year) && year > 0) decades.add(Math.floor(year / 10) * 10);
   }
 
+  fillSelect('formatFilter', [...formats].sort((a, b) => a.localeCompare(b, 'da')), value => value, value => value);
   fillSelect('genreFilter', [...genres].sort((a, b) => a.localeCompare(b, 'da')), value => value, value => value);
   fillSelect('countryFilter', [...countries].sort((a, b) => a.localeCompare(b, 'da')), value => value, value => value);
   fillSelect(
@@ -240,24 +248,26 @@ function fillSelect(id, items, labelFn, valueFn) {
 
 function filterAndSort() {
   const query = document.getElementById('searchInput').value.toLocaleLowerCase('da-DK').trim();
+  const format = document.getElementById('formatFilter').value;
   const genre = document.getElementById('genreFilter').value;
   const country = document.getElementById('countryFilter').value;
   const decade = document.getElementById('decadeFilter').value;
   const sort = document.getElementById('sortSelect').value;
 
-  const activeFilterCount = [genre, country, decade].filter(Boolean).length;
+  const activeFilterCount = [format, genre, country, decade].filter(Boolean).length;
   const filterToggle = document.getElementById('filterToggleBtn');
   filterToggle.textContent = activeFilterCount ? `Filtre (${activeFilterCount})` : 'Filtre';
 
   filteredVinyls = allVinyls.filter(vinyl => {
     if (query) {
-      const searchable = [vinyl.artist, vinyl.albumTitle, vinyl.catNo, ...getGenres(vinyl)]
+      const searchable = [vinyl.artist, vinyl.albumTitle, vinyl.catNo, getFormat(vinyl), ...getGenres(vinyl)]
         .filter(Boolean)
         .join(' ')
         .toLocaleLowerCase('da-DK');
       if (!searchable.includes(query)) return false;
     }
 
+    if (format && getFormat(vinyl) !== format) return false;
     if (genre && !getGenres(vinyl).includes(genre)) return false;
     if (country && normalizeCountry(vinyl.country) !== country) return false;
 
@@ -297,6 +307,7 @@ function filterAndSort() {
 
 function resetFilters() {
   document.getElementById('searchInput').value = '';
+  document.getElementById('formatFilter').value = '';
   document.getElementById('genreFilter').value = '';
   document.getElementById('countryFilter').value = '';
   document.getElementById('decadeFilter').value = '';
@@ -346,10 +357,11 @@ function renderCard(vinyl) {
   const catNo = escapeHtml(vinyl.catNo || '');
   const shelf = vinyl.shelf == null || vinyl.shelf === '' ? '—' : escapeHtml(vinyl.shelf);
   const genres = getGenres(vinyl);
+  const format = getFormat(vinyl);
   const genreDisplay = genres.map(value => `<span class="card-genre">${escapeHtml(value)}</span>`).join('');
   const displayPriceOre = getDisplayPriceOre(vinyl.discogsPrice);
   const inBasket = basket.includes(id);
-  const meta = [year, country].filter(Boolean).join(' · ');
+  const meta = [format, year, country].filter(Boolean).join(' · ');
 
   return `
 <article class="vinyl-card${inBasket ? ' in-basket' : ''}" data-id="${id}" data-price-ore="${displayPriceOre}">
@@ -361,6 +373,7 @@ function renderCard(vinyl) {
   <div class="card-details">
     <div><span>Discogs-pris</span><strong>${formatPriceOre(priceToOre(vinyl.discogsPrice))}</strong></div>
     <div><span>Hylde</span><strong>${shelf}</strong></div>
+    <div><span>Format</span><strong>${escapeHtml(format)}</strong></div>
     <div><span>Pladenummer</span><strong>#${id}</strong></div>
     <div><span>Katalognummer</span><strong>${catNo || '—'}</strong></div>
   </div>
@@ -721,6 +734,7 @@ async function copyOrderText(
 // =============================================
 function bindEvents() {
   document.getElementById('searchInput').addEventListener('input', filterAndSort);
+  document.getElementById('formatFilter').addEventListener('change', filterAndSort);
   document.getElementById('genreFilter').addEventListener('change', filterAndSort);
   document.getElementById('countryFilter').addEventListener('change', filterAndSort);
   document.getElementById('decadeFilter').addEventListener('change', filterAndSort);

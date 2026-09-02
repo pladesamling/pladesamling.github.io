@@ -155,6 +155,25 @@ test('search, sorting, reset and pagination work', async ({ page }) => {
   await expect(page.locator('.vinyl-card')).toHaveCount(Math.min(PAGE_SIZE * 2, availableCatalogue.length));
 });
 
+test('format filter includes non-vinyl media', async ({ page }) => {
+  const cds = availableCatalogue.filter(vinyl => vinyl.format === 'CD');
+  const cassettes = availableCatalogue.filter(vinyl => vinyl.format === 'Cassette');
+
+  await page.goto('/');
+  await expect(page.getByRole('option', { name: 'CD', exact: true })).toHaveCount(1);
+  await expect(page.getByRole('option', { name: 'Cassette', exact: true })).toHaveCount(1);
+
+  await page.getByLabel('Filtrer på format').selectOption('CD');
+  await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(cds.length));
+  await expect(page.locator('.vinyl-card')).toHaveCount(cds.length);
+  await expect(page.locator('.vinyl-card').first().locator('.card-meta')).toContainText('CD');
+
+  await page.getByLabel('Filtrer på format').selectOption('Cassette');
+  await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(cassettes.length));
+  await page.getByRole('button', { name: 'Nulstil filtre' }).click();
+  await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(availableCatalogue.length));
+});
+
 test('basket and checkout preserve the order until explicit clearing', async ({ page }) => {
   await page.goto('/');
   await page.locator('.vinyl-card').first().getByRole('button', { name: 'Læg i kurv' }).click();
