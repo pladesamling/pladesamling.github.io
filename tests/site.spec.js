@@ -48,6 +48,8 @@ test('catalogue loads without errors and uses the responsive grid', async ({ pag
   await expect(page.locator('.vinyl-card').first().locator('.card-details')).toContainText('Hylde');
   const genreCount = new Set(availableCatalogue.flatMap(getGenres)).size;
   await expect(page.locator('#genreCount')).toHaveText(String(genreCount));
+  await expect(page.locator('#filterRow')).toBeHidden();
+  await page.getByRole('button', { name: 'Filtre', exact: true }).click();
   await expect(page.getByRole('option', { name: 'Folk, World, & Country' })).toHaveCount(1);
   await expect(page.getByRole('option', { name: '& Country', exact: true })).toHaveCount(0);
 
@@ -57,6 +59,14 @@ test('catalogue loads without errors and uses the responsive grid', async ({ pag
   }));
   expect(layout.display).toBe('grid');
   expect(layout.columns).toBeGreaterThan(1);
+  const controlsFit = await page.locator('.catalogue-controls').evaluate(element =>
+    element.scrollWidth <= element.clientWidth
+  );
+  expect(controlsFit).toBe(true);
+  const controlHeights = await page.locator('#searchInput, #sortSelect, #filterToggleBtn').evaluateAll(elements =>
+    elements.map(element => Math.round(element.getBoundingClientRect().height))
+  );
+  expect(new Set(controlHeights).size).toBe(1);
   await expect(page.locator('.catalogue-tools')).toHaveCSS('position', 'sticky');
   await expect(page.locator('.catalogue-tools')).toHaveCSS('top', '64px');
   expect(catalogueRequests).toBe(1);
@@ -107,6 +117,19 @@ test('mobile layout exposes the catalogue action without horizontal overflow', a
   await page.getByRole('button', { name: 'Filtre', exact: true }).click();
   await expect(page.locator('#filterRow')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Filtre', exact: true })).toHaveAttribute('aria-expanded', 'true');
+  const mobileFilterLayout = await page.evaluate(() => {
+    const filters = document.querySelector('#filterRow').getBoundingClientRect();
+    const catalogueMeta = document.querySelector('.catalogue-meta-row').getBoundingClientRect();
+    return {
+      filtersBottom: filters.bottom,
+      metaTop: catalogueMeta.top,
+      horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth
+    };
+  });
+  expect(mobileFilterLayout.filtersBottom).toBeLessThanOrEqual(mobileFilterLayout.metaTop);
+  expect(mobileFilterLayout.horizontalOverflow).toBe(false);
+  await page.getByRole('button', { name: 'Nulstil filtre' }).click();
+  await expect(page.locator('#filterRow')).toBeVisible();
 
   await page.locator('.vinyl-card').first().getByRole('button', { name: 'Læg i kurv' }).click();
   await page.getByRole('button', { name: 'Åbn kurv' }).click();
@@ -133,6 +156,7 @@ test('search, sorting, reset and pagination work', async ({ page }) => {
   await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(abbaMatches.length));
   await expect(page.locator('.vinyl-card')).toHaveCount(Math.min(PAGE_SIZE, abbaMatches.length));
 
+  await page.getByRole('button', { name: 'Filtre', exact: true }).click();
   await page.getByRole('button', { name: 'Nulstil filtre' }).click();
   await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(availableCatalogue.length));
 
@@ -145,7 +169,7 @@ test('search, sorting, reset and pagination work', async ({ page }) => {
   await expect(page.locator('#resultCount')).toHaveText('1 plade');
   await page.getByRole('button', { name: 'Nulstil filtre' }).click();
 
-  await page.getByLabel('Sortering').selectOption('price-desc');
+  await page.getByLabel('Sortering', { exact: true }).selectOption('price-desc');
   const firstTwoPrices = await page.locator('.vinyl-card').evaluateAll(cards =>
     cards.slice(0, 2).map(card => Number(card.dataset.priceOre))
   );
@@ -160,6 +184,7 @@ test('format filter includes non-vinyl media', async ({ page }) => {
   const cassettes = availableCatalogue.filter(vinyl => vinyl.format === 'Cassette');
 
   await page.goto('/');
+  await page.getByRole('button', { name: 'Filtre', exact: true }).click();
   await expect(page.getByRole('option', { name: 'CD', exact: true })).toHaveCount(1);
   await expect(page.getByRole('option', { name: 'Cassette', exact: true })).toHaveCount(1);
 
@@ -171,7 +196,21 @@ test('format filter includes non-vinyl media', async ({ page }) => {
   await page.getByLabel('Filtrer på format').selectOption('Cassette');
   await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(cassettes.length));
   await page.getByRole('button', { name: 'Nulstil filtre' }).click();
+  await expect(page.locator('#filterRow')).toBeVisible();
   await expect(page.locator('#resultCount')).toHaveText(formatRecordCount(availableCatalogue.length));
+});
+
+test('desktop filters fold away when the catalogue is scrolled', async ({ page }) => {
+  await page.goto('/');
+  const filterButton = page.getByRole('button', { name: 'Filtre', exact: true });
+
+  await filterButton.click();
+  await expect(page.locator('#filterRow')).toBeVisible();
+  await expect(filterButton).toHaveAttribute('aria-expanded', 'true');
+
+  await page.mouse.wheel(0, 300);
+  await expect(page.locator('#filterRow')).toBeHidden();
+  await expect(filterButton).toHaveAttribute('aria-expanded', 'false');
 });
 
 test('basket and checkout preserve the order until explicit clearing', async ({ page }) => {

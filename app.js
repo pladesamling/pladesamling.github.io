@@ -16,6 +16,7 @@ const BASKET_STORAGE_KEY = 'pladesamling_basket';
 const COMBINED_COUNTRY_GENRE = 'Folk, World, & Country';
 const VALID_STATUSES = new Set(['available', 'reserved', 'sold']);
 const PHONE_ORDER_ACTION_MEDIA = window.matchMedia('(max-width: 767px)');
+const MOBILE_FILTERS_MEDIA = window.matchMedia('(max-width: 768px)');
 
 // =============================================
 // State
@@ -115,6 +116,20 @@ function getGenres(vinyl) {
 function getFormat(vinyl) {
   const value = vinyl.format == null ? '' : String(vinyl.format).trim();
   return value || 'Ukendt format';
+}
+
+function getSortSelect() {
+  return document.getElementById(MOBILE_FILTERS_MEDIA.matches ? 'sortSelectMobile' : 'sortSelect');
+}
+
+function closeFilterPanel({ restoreFocus = false } = {}) {
+  const filterRow = document.getElementById('filterRow');
+  const filterToggle = document.getElementById('filterToggleBtn');
+  if (!filterRow.classList.contains('open')) return;
+
+  filterRow.classList.remove('open');
+  filterToggle.setAttribute('aria-expanded', 'false');
+  if (restoreFocus) filterToggle.focus({ preventScroll: true });
 }
 
 function normalizeCountry(country) {
@@ -252,7 +267,7 @@ function filterAndSort() {
   const genre = document.getElementById('genreFilter').value;
   const country = document.getElementById('countryFilter').value;
   const decade = document.getElementById('decadeFilter').value;
-  const sort = document.getElementById('sortSelect').value;
+  const sort = getSortSelect().value;
 
   const activeFilterCount = [format, genre, country, decade].filter(Boolean).length;
   const filterToggle = document.getElementById('filterToggleBtn');
@@ -312,8 +327,7 @@ function resetFilters() {
   document.getElementById('countryFilter').value = '';
   document.getElementById('decadeFilter').value = '';
   document.getElementById('sortSelect').value = 'artist-az';
-  document.getElementById('filterRow').classList.remove('open');
-  document.getElementById('filterToggleBtn').setAttribute('aria-expanded', 'false');
+  document.getElementById('sortSelectMobile').value = 'artist-az';
   filterAndSort();
 }
 
@@ -739,6 +753,7 @@ function bindEvents() {
   document.getElementById('countryFilter').addEventListener('change', filterAndSort);
   document.getElementById('decadeFilter').addEventListener('change', filterAndSort);
   document.getElementById('sortSelect').addEventListener('change', filterAndSort);
+  document.getElementById('sortSelectMobile').addEventListener('change', filterAndSort);
   document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
   document.getElementById('detailedViewBtn').addEventListener('click', event => {
     const grid = document.getElementById('vinylGrid');
@@ -749,6 +764,23 @@ function bindEvents() {
     const filterRow = document.getElementById('filterRow');
     const isOpen = filterRow.classList.toggle('open');
     event.currentTarget.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  window.addEventListener('wheel', () => {
+    if (!MOBILE_FILTERS_MEDIA.matches) closeFilterPanel({ restoreFocus: true });
+  }, { passive: true });
+
+  window.addEventListener('touchmove', () => {
+    if (!MOBILE_FILTERS_MEDIA.matches) closeFilterPanel({ restoreFocus: true });
+  }, { passive: true });
+
+  document.addEventListener('pointerdown', event => {
+    const filterRow = document.getElementById('filterRow');
+    const filterToggle = document.getElementById('filterToggleBtn');
+    if (!MOBILE_FILTERS_MEDIA.matches && filterRow.classList.contains('open')
+      && !filterRow.contains(event.target) && !filterToggle.contains(event.target)) {
+      closeFilterPanel();
+    }
   });
 
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
@@ -818,7 +850,8 @@ function bindEvents() {
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
-      if (document.getElementById('checkoutOverlay').classList.contains('open')) closeCheckout();
+      if (document.getElementById('filterRow').classList.contains('open')) closeFilterPanel({ restoreFocus: true });
+      else if (document.getElementById('checkoutOverlay').classList.contains('open')) closeCheckout();
       else if (document.getElementById('basketSidebar').classList.contains('open')) closeBasket();
     }
     trapFocus(event);

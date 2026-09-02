@@ -75,17 +75,23 @@
         <p>Priserne i kataloget er allerede fratrukket rabatten. Køber du 5 eller flere, får du også mængderabat.</p>
       </aside>
       <div class="catalogue-tools">
-        <div class="catalogue-controls">
-          <div class="search-bar">
-            <label class="sr-only" for="searchInput">Søg i kataloget</label>
-            <input type="search" id="searchInput" placeholder="Søg efter kunstner, album eller genre…" aria-label="Søg i katalog" />
+          <div class="catalogue-controls">
+            <div class="search-bar">
+              <label class="sr-only" for="searchInput">Søg i kataloget</label>
+              <input type="search" id="searchInput" placeholder="Søg efter kunstner, album eller genre…" aria-label="Søg i katalog" />
+            </div>
+            <div class="desktop-sort-control">
+              <label class="sr-only" for="sortSelect">Sortering</label>
+              <select id="sortSelect" aria-label="Sortering">
+                <option value="artist-az">Kunstner A–Z</option>
+                <option value="price-asc">Pris: lavest</option>
+                <option value="price-desc">Pris: højest</option>
+                <option value="year-asc">År: ældst</option>
+                <option value="year-desc">År: nyest</option>
+              </select>
+            </div>
             <button class="filter-toggle" id="filterToggleBtn" type="button" aria-expanded="false" aria-controls="filterRow">Filtre</button>
-          </div>
           <div class="filter-row" id="filterRow">
-            <label class="sr-only" for="formatFilter">Format</label>
-            <select id="formatFilter" aria-label="Filtrer på format">
-              <option value="">Alle formater</option>
-            </select>
             <label class="sr-only" for="genreFilter">Genre</label>
             <select id="genreFilter" aria-label="Filtrer på genre">
               <option value="">Alle genrer</option>
@@ -98,9 +104,12 @@
             <select id="decadeFilter" aria-label="Filtrer på årti">
               <option value="">Alle årtier</option>
             </select>
-
-            <label class="sr-only" for="sortSelect">Sortering</label>
-            <select id="sortSelect" aria-label="Sortering">
+            <label class="sr-only" for="formatFilter">Format</label>
+            <select id="formatFilter" aria-label="Filtrer på format">
+              <option value="">Alle formater</option>
+            </select>
+            <label class="sr-only" for="sortSelectMobile">Sortering på mobil</label>
+            <select id="sortSelectMobile" aria-label="Sortering på mobil">
               <option value="artist-az">Kunstner A–Z</option>
               <option value="price-asc">Pris: lavest</option>
               <option value="price-desc">Pris: højest</option>

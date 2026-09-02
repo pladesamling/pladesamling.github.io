@@ -340,13 +340,12 @@ a:focus-visible {
 }
 .catalogue-controls {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) auto;
+  grid-template-columns: minmax(260px, 1fr) auto auto;
   gap: 10px;
   align-items: stretch;
 }
 .search-bar {
-  display: flex;
-  gap: 8px;
+  min-width: 0;
 }
 .search-bar input {
   width: 100%;
@@ -365,11 +364,7 @@ a:focus-visible {
   box-shadow: 0 0 0 3px rgba(181,69,27,0.12);
 }
 
-.filter-row {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 10px;
-}
+.desktop-sort-control select,
 .filter-row select,
 .filter-row input[type="number"] {
   padding: 9px 36px 9px 12px;
@@ -386,6 +381,55 @@ a:focus-visible {
   appearance: auto;
 }
 
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  padding: 9px 12px;
+  color: var(--text-body);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.filter-toggle:focus-visible {
+  border-color: var(--accent);
+  outline: 3px solid rgba(181, 69, 27, 0.12);
+}
+
+.filter-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(130px, 1fr)) auto;
+  gap: 10px;
+  height: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  background: var(--surface);
+  border: 0 solid var(--border);
+  border-radius: var(--radius);
+  pointer-events: none;
+  transition: height 180ms ease, padding 180ms ease, opacity 120ms ease, border-width 180ms ease;
+}
+.filter-row.open {
+  height: 68px;
+  padding: 10px;
+  opacity: 1;
+  border-width: 1.5px;
+  pointer-events: auto;
+}
+.filter-row .btn-reset {
+  grid-column: auto;
+}
+.filter-row #sortSelectMobile { display: none; }
+
 .btn-reset {
   padding: 9px 16px;
   font-size: 0.9rem;
@@ -400,8 +444,6 @@ a:focus-visible {
   white-space: nowrap;
 }
 .btn-reset:hover { color: var(--accent); border-color: var(--accent); }
-
-.filter-toggle { display: none; }
 
 .result-count {
   font-size: 0.9rem;
@@ -910,8 +952,17 @@ a:focus-visible {
    Responsive
    ============================================= */
 @media (max-width: 1100px) {
-  .catalogue-controls { grid-template-columns: 1fr; }
-  .filter-row { flex-wrap: wrap; }
+  .filter-row { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
+  .filter-row.open { height: 120px; }
+  .filter-row .btn-reset { grid-column: 1 / -1; }
+}
+@media (min-width: 769px) {
+  .search-bar input,
+  .desktop-sort-control select,
+  .filter-toggle {
+    box-sizing: border-box;
+    height: 56px;
+  }
 }
 @media (max-width: 768px) {
   .hero { padding: 32px 16px 30px; }
@@ -938,35 +989,35 @@ a:focus-visible {
     margin-inline: -16px;
     padding: 10px 16px 8px;
   }
-  .catalogue-controls { display: block; }
+  .catalogue-controls { grid-template-columns: minmax(0, 1fr) auto; }
   .search-bar input { min-width: 0; }
-  .filter-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 88px;
-    padding: 9px 12px;
-    color: var(--text-body);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-  }
-  .filter-toggle:focus-visible {
-    border-color: var(--accent);
-    outline: 3px solid rgba(181, 69, 27, 0.12);
-  }
+  .desktop-sort-control { display: none; }
   .filter-row {
+    position: static;
     display: none;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: auto;
     gap: 8px;
     margin-top: 10px;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+    opacity: 1;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    pointer-events: auto;
+    transition: none;
   }
   .filter-row.open { display: grid; }
+  .filter-row.open {
+    height: auto;
+    padding: 0;
+    border-width: 0;
+  }
   .filter-row select { min-width: 0; font-size: 0.85rem; }
+  .filter-row #sortSelectMobile { display: block; }
   .btn-reset { grid-column: 1 / -1; }
   .catalogue-meta-row { margin-top: 6px; }
 }
