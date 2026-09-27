@@ -1,5 +1,122 @@
 [
   {
+    "id": 2494,
+    "artist": "Lee Ritenour",
+    "albumTitle": "Feel The Night",
+    "country": "Germany",
+    "released": 1979,
+    "catNo": "ELK 52 141",
+    "discogsPrice": 52.75,
+    "shelf": 14,
+    "genres": "Jazz",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2495,
+    "artist": "Linda Peterson",
+    "albumTitle": "Too Late To Leave Early",
+    "country": "US",
+    "released": 1984,
+    "catNo": "CB5015",
+    "discogsPrice": 50.75,
+    "shelf": 14,
+    "genres": "Jazz",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2496,
+    "artist": "Art Pepper",
+    "albumTitle": "Friday Night At The Village Vanguard",
+    "country": "France",
+    "released": 1985,
+    "catNo": "68.607",
+    "discogsPrice": 207.75,
+    "shelf": 2,
+    "genres": "Jazz",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2497,
+    "artist": "Gasolin'",
+    "albumTitle": "Bob",
+    "country": "Denmark",
+    "released": 1978,
+    "catNo": "CBS 6826",
+    "discogsPrice": 348,
+    "shelf": 9,
+    "genres": "Rock",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2498,
+    "artist": "Gasolin'",
+    "albumTitle": "Killin' Time",
+    "country": "Denmark",
+    "released": 1978,
+    "catNo": "CBS 82900",
+    "discogsPrice": 55.75,
+    "shelf": 9,
+    "genres": "Rock",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2499,
+    "artist": "Prince",
+    "albumTitle": "Controversy",
+    "country": "Germany",
+    "released": 1981,
+    "catNo": "K 56950",
+    "discogsPrice": 200.5,
+    "shelf": 18,
+    "genres": "Electronic, Rock, Funk / Soul",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2500,
+    "artist": "Stan Getz",
+    "albumTitle": "Award Winner",
+    "country": "Spain",
+    "released": 2012,
+    "catNo": "771767",
+    "discogsPrice": 139.75,
+    "shelf": 21,
+    "genres": "Jazz",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2501,
+    "artist": "Stan Getz Quartet",
+    "albumTitle": "Stan Getz Quartet In Paris",
+    "country": "France",
+    "released": 1982,
+    "catNo": "2304 044",
+    "discogsPrice": 98.5,
+    "shelf": 21,
+    "genres": "Jazz",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2502,
+    "artist": "Uriah Heep",
+    "albumTitle": "The Magician's Birthday",
+    "country": "UK",
+    "released": 1972,
+    "catNo": "ILPS 9213",
+    "discogsPrice": 199.25,
+    "shelf": 27,
+    "genres": "Rock",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
     "id": 2358,
     "artist": "Ahmed Abdullah Quartet",
     "albumTitle": "Liquid Magic",
@@ -373,19 +490,6 @@
     "discogsPrice": 49,
     "shelf": 17,
     "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2419,
-    "artist": "Savage Rose",
-    "albumTitle": "Dødens Triumf",
-    "country": "Scandinavia",
-    "released": 1972,
-    "catNo": "2380 016",
-    "discogsPrice": 65,
-    "shelf": 19,
-    "genres": "Rock, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -858,19 +962,6 @@
     "status": "available"
   },
   {
-    "id": 2481,
-    "artist": "tv-2",
-    "albumTitle": "tv-2 - Nærmest Lykkelig",
-    "country": "Denmark",
-    "released": 1988,
-    "catNo": "CBS 462427 1",
-    "discogsPrice": 37.25,
-    "shelf": 26,
-    "genres": "Electronic, Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 2484,
     "artist": "tv-2",
     "albumTitle": "tv-2 - Vi Blir Alligevel Aldrig Voksne",
@@ -932,6 +1023,71 @@
     "discogsPrice": 69.25,
     "shelf": 28,
     "genres": "Jazz",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2503,
+    "artist": "ABBA",
+    "albumTitle": "Arrival",
+    "country": "Denmark",
+    "released": 1976,
+    "catNo": "POLS 272",
+    "discogsPrice": 91.75,
+    "shelf": null,
+    "genres": "Pop",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2504,
+    "artist": "Culture Club",
+    "albumTitle": "Karma Chameleon",
+    "country": "Europe",
+    "released": 1983,
+    "catNo": "600 980",
+    "discogsPrice": 28,
+    "shelf": null,
+    "genres": "Pop",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2505,
+    "artist": "Elton John",
+    "albumTitle": "Caribou",
+    "country": "UK",
+    "released": 1974,
+    "catNo": "DJLPH 439",
+    "discogsPrice": 62.25,
+    "shelf": null,
+    "genres": "Rock",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2506,
+    "artist": "Sneakers",
+    "albumTitle": "Rou'let",
+    "country": "Denmark",
+    "released": 1982,
+    "catNo": "6344 244",
+    "discogsPrice": 39.5,
+    "shelf": null,
+    "genres": "Rock",
+    "format": "Vinyl 12\"",
+    "status": "available"
+  },
+  {
+    "id": 2507,
+    "artist": "Sting",
+    "albumTitle": "All This Time",
+    "country": "Netherlands",
+    "released": 1990,
+    "catNo": "390 614-1",
+    "discogsPrice": 43.25,
+    "shelf": null,
+    "genres": "Rock",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -1612,19 +1768,6 @@
     "status": "available"
   },
   {
-    "id": 1,
-    "artist": "[Lowbudget] Blues Band",
-    "albumTitle": "Vol II.",
-    "country": "Europe",
-    "released": 1990,
-    "catNo": "9031-73021-1",
-    "discogsPrice": 39.25,
-    "shelf": 1,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 29,
     "artist": "Acker Bilk",
     "albumTitle": "Mood For Love",
@@ -2067,19 +2210,6 @@
     "status": "available"
   },
   {
-    "id": 1002,
-    "artist": "Joe Pass And Niels-Henning Ørsted Pedersen",
-    "albumTitle": "Henning Ørsted Pedersen",
-    "country": "Germany",
-    "released": 1980,
-    "catNo": "2308 221",
-    "discogsPrice": 112.5,
-    "shelf": 12,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1028,
     "artist": "John Scofield",
     "albumTitle": "East Meets West",
@@ -2243,19 +2373,6 @@
     "released": 1959,
     "catNo": "CS 8110",
     "discogsPrice": 48.5,
-    "shelf": 15,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1257,
-    "artist": "Louis Armstrong",
-    "albumTitle": "The Very Best Of Louis Armstrong 20 Golden Greats",
-    "country": "UK",
-    "released": 1981,
-    "catNo": "WW 5112",
-    "discogsPrice": 39,
     "shelf": 15,
     "genres": "Jazz",
     "format": "Vinyl 12\"",
@@ -3614,19 +3731,6 @@
     "status": "available"
   },
   {
-    "id": 2198,
-    "artist": "Troels Trier & Rebecca Brüel",
-    "albumTitle": "Bøf Med Løg",
-    "country": "Denmark",
-    "released": 1986,
-    "catNo": "HMLP 4323",
-    "discogsPrice": 38,
-    "shelf": 26,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 2197,
     "artist": "Troels Trier & Rebecca Brüel",
     "albumTitle": "Hansen & Jensen",
@@ -3640,19 +3744,6 @@
     "status": "available"
   },
   {
-    "id": 2483,
-    "artist": "tv-2",
-    "albumTitle": "tv-2 - Rigtige Mænd Gider Ikke Høre Mere Vrøvl",
-    "country": "Denmark",
-    "released": 1985,
-    "catNo": "CBS 26675",
-    "discogsPrice": 35.75,
-    "shelf": 26,
-    "genres": "Electronic, Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 2485,
     "artist": "tv-2",
     "albumTitle": "tv-2 - Vi Blir Alligevel Aldrig Voksne",
@@ -3662,45 +3753,6 @@
     "discogsPrice": 39.75,
     "shelf": 26,
     "genres": "Electronic, Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2205,
-    "artist": "Tøsedrengene",
-    "albumTitle": "... Det Går Fremad!",
-    "country": "Denmark",
-    "released": 1979,
-    "catNo": "6318 204",
-    "discogsPrice": 58.25,
-    "shelf": 27,
-    "genres": "Reggae, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2206,
-    "artist": "Tøsedrengene",
-    "albumTitle": "Tiden Er Klog",
-    "country": "Denmark",
-    "released": 1984,
-    "catNo": "822 003-1",
-    "discogsPrice": 38,
-    "shelf": 27,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2207,
-    "artist": "Tøsedrengene",
-    "albumTitle": "Tiden Står Stille",
-    "country": "Denmark",
-    "released": 1981,
-    "catNo": "6344 233",
-    "discogsPrice": 39.5,
-    "shelf": 27,
-    "genres": "Rock, Reggae, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -3978,32 +4030,6 @@
     "status": "available"
   },
   {
-    "id": 1559,
-    "artist": "Røde Mor",
-    "albumTitle": "Betonhjertet",
-    "country": "Denmark",
-    "released": 1975,
-    "catNo": "DEMOS 30 - 31",
-    "discogsPrice": 49,
-    "shelf": 19,
-    "genres": "Rock, Folk, World, & Country, Stage & Screen",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1556,
-    "artist": "Røde Mor",
-    "albumTitle": "Grillbaren",
-    "country": "Denmark",
-    "released": null,
-    "catNo": "DEMOS 17",
-    "discogsPrice": 69.5,
-    "shelf": 19,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1555,
     "artist": "Røde Mor",
     "albumTitle": "Linie 3",
@@ -4011,32 +4037,6 @@
     "released": 1975,
     "catNo": "DEMOS 23",
     "discogsPrice": 71.75,
-    "shelf": 19,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1558,
-    "artist": "Røde Mor",
-    "albumTitle": "Rok Ork",
-    "country": "Denmark",
-    "released": 1971,
-    "catNo": "DEMOS 6",
-    "discogsPrice": 44.5,
-    "shelf": 19,
-    "genres": "Rock, Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1557,
-    "artist": "Røde Mor",
-    "albumTitle": "Ta Hva Der Er Dit",
-    "country": "Denmark",
-    "released": null,
-    "catNo": "DEMOS 10",
-    "discogsPrice": 40.75,
     "shelf": 19,
     "genres": "Rock",
     "format": "Vinyl 12\"",
@@ -4078,19 +4078,6 @@
     "discogsPrice": 69.75,
     "shelf": 19,
     "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1610,
-    "artist": "Sebastian",
-    "albumTitle": "Den Danske Sang",
-    "country": "Denmark",
-    "released": 1985,
-    "catNo": "MDLP 6240",
-    "discogsPrice": 41.75,
-    "shelf": 19,
-    "genres": "Rock, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -4312,19 +4299,6 @@
     "discogsPrice": 38.5,
     "shelf": 26,
     "genres": "Electronic, Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2208,
-    "artist": "Tøsedrengene",
-    "albumTitle": "I Sikre Hænder",
-    "country": "Denmark",
-    "released": 1985,
-    "catNo": "826 393-1",
-    "discogsPrice": 39.5,
-    "shelf": 27,
-    "genres": "Rock, Reggae, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -4576,19 +4550,6 @@
     "status": "available"
   },
   {
-    "id": 1383,
-    "artist": "Mænd I Blåt",
-    "albumTitle": "For Et Hundeliv Siden",
-    "country": "Denmark",
-    "released": 1989,
-    "catNo": "CBS 465488 1",
-    "discogsPrice": 41.5,
-    "shelf": 17,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1406,
     "artist": "Ole Friis",
     "albumTitle": "Ole Friis m. Finn & De Fem Fejl",
@@ -4624,19 +4585,6 @@
     "discogsPrice": 41.5,
     "shelf": 17,
     "genres": "Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1505,
-    "artist": "Rockrosinen & Pølseenderne",
-    "albumTitle": "Mogensen Mix",
-    "country": "Denmark",
-    "released": 1990,
-    "catNo": "12 ROCK3",
-    "discogsPrice": 27.5,
-    "shelf": 18,
-    "genres": "Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -4680,19 +4628,6 @@
     "status": "available"
   },
   {
-    "id": 2425,
-    "artist": "Shu-Bi-Dua",
-    "albumTitle": "Shu-Bi-Dua - Shu-Bi-Dua 7",
-    "country": "Denmark",
-    "released": 1980,
-    "catNo": "SHUB 007",
-    "discogsPrice": 37.5,
-    "shelf": 20,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 2426,
     "artist": "Shu-Bi-Dua",
     "albumTitle": "Shu-Bi-Dua - Shu-Bi-Dua's Værste",
@@ -4715,19 +4650,6 @@
     "discogsPrice": 41.75,
     "shelf": 20,
     "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2428,
-    "artist": "Shu-Bi-Dua",
-    "albumTitle": "Shu-Bi-Dua - Shu•bi•dua 4",
-    "country": "Denmark",
-    "released": 1977,
-    "catNo": "2380 053",
-    "discogsPrice": 40,
-    "shelf": 20,
-    "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -4923,19 +4845,6 @@
     "discogsPrice": 40,
     "shelf": 27,
     "genres": "Jazz, Rock, Blues, Pop, Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2270,
-    "artist": "Various",
-    "albumTitle": "Saturday Night Fever (The Original Movie Sound Track)",
-    "country": "Scandinavia",
-    "released": 1978,
-    "catNo": null,
-    "discogsPrice": 36.75,
-    "shelf": 27,
-    "genres": "Latin, Funk / Soul, Pop, Stage & Screen",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -5174,19 +5083,6 @@
     "status": "available"
   },
   {
-    "id": 842,
-    "artist": "Halberg-Larsen",
-    "albumTitle": "Larsen",
-    "country": "Denmark",
-    "released": 1985,
-    "catNo": "RELP 2505",
-    "discogsPrice": 39.25,
-    "shelf": 10,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 863,
     "artist": "Henning Stærk Band",
     "albumTitle": "One Nite Stand",
@@ -5226,19 +5122,6 @@
     "status": "available"
   },
   {
-    "id": 1018,
-    "artist": "John Mogensen",
-    "albumTitle": "Der Er Noget Galt I Danmark",
-    "country": "Denmark",
-    "released": 1994,
-    "catNo": "FLAP LP-001",
-    "discogsPrice": 97.75,
-    "shelf": 12,
-    "genres": "Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1020,
     "artist": "John Mogensen",
     "albumTitle": "John's Bedste 2",
@@ -5248,19 +5131,6 @@
     "discogsPrice": 40.75,
     "shelf": 12,
     "genres": "Pop, Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1021,
-    "artist": "John Mogensen",
-    "albumTitle": "Nordstjernen",
-    "country": "Denmark",
-    "released": 1978,
-    "catNo": "ROLP 6565",
-    "discogsPrice": 49.25,
-    "shelf": 12,
-    "genres": "Rock, Pop, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -5339,32 +5209,6 @@
     "discogsPrice": 104.25,
     "shelf": 14,
     "genres": "Electronic, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1145,
-    "artist": "Lars Lilholt",
-    "albumTitle": "Med Natten Mod Vest",
-    "country": "Denmark",
-    "released": 1991,
-    "catNo": "510 002 1",
-    "discogsPrice": 43.25,
-    "shelf": 14,
-    "genres": "Rock, Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1230,
-    "artist": "Lone Kellermann & Rockbandet",
-    "albumTitle": "Før Natten Bli'r Til Dag",
-    "country": "Scandinavia",
-    "released": null,
-    "catNo": "CBS 82706",
-    "discogsPrice": 36.25,
-    "shelf": 15,
-    "genres": "Rock",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -5525,19 +5369,6 @@
     "status": "available"
   },
   {
-    "id": 1335,
-    "artist": "Michael Falch",
-    "albumTitle": "De Vildeste Fugle",
-    "country": "Denmark",
-    "released": 1988,
-    "catNo": "MdLP 6330",
-    "discogsPrice": 40.75,
-    "shelf": 16,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1334,
     "artist": "Michael Falch",
     "albumTitle": "Tossede Verden",
@@ -5655,19 +5486,6 @@
     "status": "available"
   },
   {
-    "id": 2204,
-    "artist": "Tyggegummibanden",
-    "albumTitle": "Fuld Fart",
-    "country": "Denmark",
-    "released": 1976,
-    "catNo": "238-38137",
-    "discogsPrice": 60.5,
-    "shelf": 27,
-    "genres": "Rock, Pop",
-    "format": "Cassette",
-    "status": "available"
-  },
-  {
     "id": 2272,
     "artist": "Various",
     "albumTitle": "Beat (100 Years Of Recorded Sound",
@@ -5742,19 +5560,6 @@
     "discogsPrice": 119,
     "shelf": 10,
     "genres": "Rock, Pop, Stage & Screen",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 861,
-    "artist": "Henning Stærk",
-    "albumTitle": "Dreams To Remember",
-    "country": "Denmark",
-    "released": 1989,
-    "catNo": "GENLP 172",
-    "discogsPrice": 36.5,
-    "shelf": 10,
-    "genres": "Rock",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -6032,19 +5837,6 @@
     "status": "available"
   },
   {
-    "id": 1129,
-    "artist": "Kristian Lilholt",
-    "albumTitle": "ChairInAir",
-    "country": "Denmark",
-    "released": 1987,
-    "catNo": "MdLp 6327",
-    "discogsPrice": 43.75,
-    "shelf": 14,
-    "genres": "Electronic, Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1131,
     "artist": "Kræn Bysted",
     "albumTitle": "Den Anden Kræn",
@@ -6158,19 +5950,6 @@
     "discogsPrice": 40.5,
     "shelf": 14,
     "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1207,
-    "artist": "Lis Sørensen",
-    "albumTitle": "Sigøjnerblod",
-    "country": "Denmark",
-    "released": 1987,
-    "catNo": null,
-    "discogsPrice": 39,
-    "shelf": 15,
-    "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -6383,19 +6162,6 @@
     "status": "available"
   },
   {
-    "id": 2295,
-    "artist": "Vesterbro Ungdomsgård",
-    "albumTitle": "Kattejammer Rock",
-    "country": "Denmark",
-    "released": 1976,
-    "catNo": "2444 048",
-    "discogsPrice": 50.5,
-    "shelf": 28,
-    "genres": "Rock, Children's",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 2321,
     "artist": "Warm Guns",
     "albumTitle": "Italiano Moderno",
@@ -6418,19 +6184,6 @@
     "discogsPrice": 105.75,
     "shelf": 28,
     "genres": "Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 73,
-    "artist": "Anne Grete",
-    "albumTitle": "Anne Grete",
-    "country": "Denmark",
-    "released": 1980,
-    "catNo": "MdLP 6019",
-    "discogsPrice": 40.5,
-    "shelf": 1,
-    "genres": "Blues",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -6487,19 +6240,6 @@
     "status": "available"
   },
   {
-    "id": 86,
-    "artist": "Anne Linnet",
-    "albumTitle": "Krig Og Kærlighed",
-    "country": "Denmark",
-    "released": 1990,
-    "catNo": "PCLP 8021",
-    "discogsPrice": 43,
-    "shelf": 1,
-    "genres": "Rock, Pop, Stage & Screen",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 85,
     "artist": "Anne Linnet",
     "albumTitle": "Min Sang",
@@ -6509,32 +6249,6 @@
     "discogsPrice": 39,
     "shelf": 1,
     "genres": "Rock, Pop, Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 88,
-    "artist": "Anne Linnet Band",
-    "albumTitle": "Anne Linnet Band",
-    "country": "Scandinavia",
-    "released": 1981,
-    "catNo": "85350",
-    "discogsPrice": 35,
-    "shelf": 2,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 87,
-    "artist": "Anne Linnet Band",
-    "albumTitle": "Cha Cha Cha",
-    "country": "Denmark",
-    "released": 1982,
-    "catNo": "25161",
-    "discogsPrice": 36.75,
-    "shelf": 2,
-    "genres": "Electronic, Rock, Pop, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -6578,19 +6292,6 @@
     "status": "available"
   },
   {
-    "id": 139,
-    "artist": "Bamses Venner",
-    "albumTitle": "Bamses Venner",
-    "country": "Denmark",
-    "released": 1975,
-    "catNo": "JKLP 654",
-    "discogsPrice": 40.75,
-    "shelf": 2,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 144,
     "artist": "Bamses Venner",
     "albumTitle": "Bamses Venner",
@@ -6613,19 +6314,6 @@
     "discogsPrice": 80.25,
     "shelf": 2,
     "genres": "Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 147,
-    "artist": "Bamses Venner",
-    "albumTitle": "Guld Med Bamses Venner",
-    "country": "Denmark",
-    "released": 1976,
-    "catNo": "PLAY 9521",
-    "discogsPrice": 42.5,
-    "shelf": 2,
-    "genres": "Rock, Pop, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -6717,19 +6405,6 @@
     "discogsPrice": 40.5,
     "shelf": 4,
     "genres": "Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 282,
-    "artist": "Bornholms Musikexpres",
-    "albumTitle": "På Skinner",
-    "country": "Denmark",
-    "released": 1979,
-    "catNo": null,
-    "discogsPrice": 40.5,
-    "shelf": 4,
-    "genres": "Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -7046,32 +6721,6 @@
     "status": "available"
   },
   {
-    "id": 19,
-    "artist": "ABBA",
-    "albumTitle": "The Collection Volume 2",
-    "country": "UK",
-    "released": 1988,
-    "catNo": "CCSLP 198",
-    "discogsPrice": 117.25,
-    "shelf": 1,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 72,
-    "artist": "Anne Dorte Michelsen",
-    "albumTitle": "Alting Vender Tilbage",
-    "country": "Denmark",
-    "released": 1987,
-    "catNo": "MdLP 6305",
-    "discogsPrice": 41,
-    "shelf": 1,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 71,
     "artist": "Anne Dorte Michelsen",
     "albumTitle": "Den Ordløse Time",
@@ -7094,19 +6743,6 @@
     "discogsPrice": 41,
     "shelf": 1,
     "genres": "Blues",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 81,
-    "artist": "Anne Grete",
-    "albumTitle": "Farlig Som Ild",
-    "country": "Denmark",
-    "released": 1984,
-    "catNo": "MdLP 6177",
-    "discogsPrice": 41,
-    "shelf": 1,
-    "genres": "Rock",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -7679,19 +7315,6 @@
     "discogsPrice": 37,
     "shelf": 1,
     "genres": "Pop, Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 395,
-    "artist": "Climie Fisher",
-    "albumTitle": "Everything",
-    "country": "Europe",
-    "released": 1987,
-    "catNo": "7 48338 1",
-    "discogsPrice": 41.5,
-    "shelf": 5,
-    "genres": "Electronic, Rock",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -8359,19 +7982,6 @@
     "status": "available"
   },
   {
-    "id": 914,
-    "artist": "Icehouse",
-    "albumTitle": "Primitive Man",
-    "country": "Europe",
-    "released": 1982,
-    "catNo": "204 980",
-    "discogsPrice": 35.25,
-    "shelf": 11,
-    "genres": "Electronic",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1110,
     "artist": "Klaus Wunderlich",
     "albumTitle": "Hammond Pops 7",
@@ -8580,32 +8190,6 @@
     "status": "available"
   },
   {
-    "id": 1805,
-    "artist": "Supertramp",
-    "albumTitle": "Paris",
-    "country": "UK",
-    "released": 1980,
-    "catNo": "AMLM 66702",
-    "discogsPrice": 69.75,
-    "shelf": 22,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1812,
-    "artist": "Suzanne Vega",
-    "albumTitle": "Solitude Standing",
-    "country": "Canada",
-    "released": 1987,
-    "catNo": "SP 9504",
-    "discogsPrice": 54,
-    "shelf": 22,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1841,
     "artist": "T-Connection",
     "albumTitle": "Connection",
@@ -8769,19 +8353,6 @@
     "released": 1981,
     "catNo": "CN 2044",
     "discogsPrice": 40.5,
-    "shelf": 25,
-    "genres": "Funk / Soul",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2120,
-    "artist": "The Supremes",
-    "albumTitle": "Greatest Hits",
-    "country": "Denmark",
-    "released": 1967,
-    "catNo": "2-663",
-    "discogsPrice": 62.75,
     "shelf": 25,
     "genres": "Funk / Soul",
     "format": "Vinyl 12\"",
@@ -9213,19 +8784,6 @@
     "discogsPrice": 109.25,
     "shelf": 27,
     "genres": "Reggae, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2217,
-    "artist": "Ultravox",
-    "albumTitle": "Lament",
-    "country": "Scandinavia",
-    "released": 1984,
-    "catNo": "CDL 1459",
-    "discogsPrice": 66.5,
-    "shelf": 27,
-    "genres": "Electronic",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -9887,19 +9445,6 @@
     "released": 1972,
     "catNo": "PD 5508",
     "discogsPrice": 72.75,
-    "shelf": 20,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1687,
-    "artist": "Slade",
-    "albumTitle": "Slade In Flame",
-    "country": "UK",
-    "released": 1974,
-    "catNo": "2442 126",
-    "discogsPrice": 60.5,
     "shelf": 20,
     "genres": "Rock",
     "format": "Vinyl 12\"",
@@ -10647,19 +10192,6 @@
     "status": "available"
   },
   {
-    "id": 1851,
-    "artist": "Ted Nugent",
-    "albumTitle": "Free",
-    "country": "Europe",
-    "released": 1976,
-    "catNo": "EPC 81397",
-    "discogsPrice": 63.5,
-    "shelf": 22,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1852,
     "artist": "Ted Nugent",
     "albumTitle": "Scream Dream",
@@ -10981,19 +10513,6 @@
     "discogsPrice": 50.5,
     "shelf": 19,
     "genres": "Funk / Soul",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1539,
-    "artist": "Roxy Music",
-    "albumTitle": "The Atlantic Years 1973",
-    "country": "Germany",
-    "released": 1983,
-    "catNo": "815 849-1",
-    "discogsPrice": 41,
-    "shelf": 19,
-    "genres": "Electronic, Rock, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -12883,19 +12402,6 @@
     "status": "available"
   },
   {
-    "id": 1470,
-    "artist": "Procol Harum",
-    "albumTitle": "Exotic Birds And Fruit",
-    "country": "US",
-    "released": 1974,
-    "catNo": "CHR 1058",
-    "discogsPrice": 61.25,
-    "shelf": 18,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 2047,
     "artist": "The Persuaders",
     "albumTitle": "Best Thing That Ever Happened To Me",
@@ -13230,19 +12736,6 @@
     "discogsPrice": 75.75,
     "shelf": 12,
     "genres": "Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1003,
-    "artist": "Joe Satriani",
-    "albumTitle": "Flying In A Blue Dream",
-    "country": "UK",
-    "released": 1989,
-    "catNo": null,
-    "discogsPrice": 79.25,
-    "shelf": 12,
-    "genres": "Rock",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -13793,19 +13286,6 @@
     "status": "available"
   },
   {
-    "id": 1371,
-    "artist": "Mink DeVille",
-    "albumTitle": "Coup De Grâce",
-    "country": "US",
-    "released": 1981,
-    "catNo": "SD 19311",
-    "discogsPrice": 46,
-    "shelf": 17,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1370,
     "artist": "Mink DeVille",
     "albumTitle": "Savoir Faire",
@@ -13881,19 +13361,6 @@
     "shelf": 11,
     "genres": "Electronic, Rock, Pop",
     "format": "CD",
-    "status": "available"
-  },
-  {
-    "id": 915,
-    "artist": "Icehouse",
-    "albumTitle": "Icehouse",
-    "country": "UK",
-    "released": null,
-    "catNo": "CHR 1350",
-    "discogsPrice": 98.75,
-    "shelf": 11,
-    "genres": "Electronic, Rock",
-    "format": "Vinyl 12\"",
     "status": "available"
   },
   {
@@ -14170,32 +13637,6 @@
     "status": "available"
   },
   {
-    "id": 1308,
-    "artist": "Meat Loaf",
-    "albumTitle": "Dead Ringer",
-    "country": "Europe",
-    "released": 1981,
-    "catNo": "EPC 83645",
-    "discogsPrice": 32,
-    "shelf": 16,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1321,
-    "artist": "Men At Work",
-    "albumTitle": "Cargo",
-    "country": "Europe",
-    "released": 1983,
-    "catNo": "CBS 25372",
-    "discogsPrice": 35.25,
-    "shelf": 16,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1320,
     "artist": "Men At Work",
     "albumTitle": "Two Hearts",
@@ -14443,19 +13884,6 @@
     "status": "available"
   },
   {
-    "id": 851,
-    "artist": "Harpo",
-    "albumTitle": "Harpo Hits",
-    "country": "Sweden",
-    "released": 1977,
-    "catNo": "7C 062-35410",
-    "discogsPrice": 35,
-    "shelf": 10,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 884,
     "artist": "Herman's Hermits",
     "albumTitle": "Greatest Hits",
@@ -14517,19 +13945,6 @@
     "discogsPrice": 66.25,
     "shelf": 12,
     "genres": "Electronic",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 975,
-    "artist": "Jethro Tull",
-    "albumTitle": "Original Masters",
-    "country": "UK",
-    "released": 1985,
-    "catNo": "CHR 1515",
-    "discogsPrice": 90,
-    "shelf": 12,
-    "genres": "Jazz, Rock, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -14751,19 +14166,6 @@
     "discogsPrice": 56.5,
     "shelf": 14,
     "genres": "Folk, World, & Country",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1322,
-    "artist": "Men At Work",
-    "albumTitle": "Business As Usual",
-    "country": "Europe",
-    "released": 1981,
-    "catNo": "85423",
-    "discogsPrice": 44.5,
-    "shelf": 16,
-    "genres": "Rock",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -15050,19 +14452,6 @@
     "discogsPrice": 35.75,
     "shelf": 10,
     "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 793,
-    "artist": "Gilbert O'Sullivan",
-    "albumTitle": "Greatest Hits",
-    "country": "Scandinavia",
-    "released": 1976,
-    "catNo": "6C 062 98478",
-    "discogsPrice": 37.25,
-    "shelf": 10,
-    "genres": "Pop, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -15886,19 +15275,6 @@
     "status": "available"
   },
   {
-    "id": 380,
-    "artist": "Cliff Richard",
-    "albumTitle": "40 Golden Greats",
-    "country": "UK",
-    "released": null,
-    "catNo": "EMTVS6",
-    "discogsPrice": 45.75,
-    "shelf": 5,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 374,
     "artist": "Cliff Richard",
     "albumTitle": "Always Guaranteed",
@@ -16194,19 +15570,6 @@
     "discogsPrice": 47,
     "shelf": 4,
     "genres": "Electronic, Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 314,
-    "artist": "Carpenters",
-    "albumTitle": "Now & Then",
-    "country": "UK",
-    "released": 1973,
-    "catNo": "AMLH 63519",
-    "discogsPrice": 40.25,
-    "shelf": 4,
-    "genres": "Jazz, Rock, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -16558,19 +15921,6 @@
     "discogsPrice": 94.25,
     "shelf": 4,
     "genres": "Electronic, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 277,
-    "artist": "Bonnie Tyler",
-    "albumTitle": "Natural Force",
-    "country": "UK",
-    "released": 1978,
-    "catNo": "PL 25152",
-    "discogsPrice": 35.25,
-    "shelf": 4,
-    "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -17013,19 +16363,6 @@
     "discogsPrice": 44.75,
     "shelf": 2,
     "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 164,
-    "artist": "Bellamy Brothers",
-    "albumTitle": "Plain & Fancy",
-    "country": "US",
-    "released": 1977,
-    "catNo": "BS 3034",
-    "discogsPrice": 35.25,
-    "shelf": 2,
-    "genres": "Folk, World, & Country",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -18057,19 +17394,6 @@
     "status": "available"
   },
   {
-    "id": 264,
-    "artist": "Bo Stief",
-    "albumTitle": "Hidden Frontiers",
-    "country": "Denmark",
-    "released": 1987,
-    "catNo": "RELP 3505",
-    "discogsPrice": 105.25,
-    "shelf": 4,
-    "genres": "Jazz, Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 283,
     "artist": "Branford Marsalis",
     "albumTitle": "Royal Garden Blues",
@@ -18330,19 +17654,6 @@
     "status": "available"
   },
   {
-    "id": 479,
-    "artist": "Delta-Cross Band",
-    "albumTitle": "Cross Band",
-    "country": "Denmark",
-    "released": 1979,
-    "catNo": "MdLP 6031",
-    "discogsPrice": 39,
-    "shelf": 6,
-    "genres": "Rock, Blues",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 480,
     "artist": "Delta-Cross Band",
     "albumTitle": "Cross Band",
@@ -18352,32 +17663,6 @@
     "discogsPrice": 39,
     "shelf": 6,
     "genres": "Rock, Blues",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 478,
-    "artist": "Delta-Cross Band",
-    "albumTitle": "Cross Band",
-    "country": "Denmark",
-    "released": 1981,
-    "catNo": "MdLP 6065",
-    "discogsPrice": 40.5,
-    "shelf": 6,
-    "genres": "Rock, Blues",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 481,
-    "artist": "Delta-Cross Band",
-    "albumTitle": "Cross Band",
-    "country": "Denmark",
-    "released": 1982,
-    "catNo": "MDLP 6120",
-    "discogsPrice": 40.5,
-    "shelf": 6,
-    "genres": "Rock, Blues, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -18506,19 +17791,6 @@
     "released": 1975,
     "catNo": "SNTF 692",
     "discogsPrice": 94,
-    "shelf": 6,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 499,
-    "artist": "Dizzy Gillespie",
-    "albumTitle": "The Greatest Of Dizzy Gillespie",
-    "country": "US",
-    "released": 1961,
-    "catNo": "LPM-2398",
-    "discogsPrice": 58.25,
     "shelf": 6,
     "genres": "Jazz",
     "format": "Vinyl 12\"",
@@ -18779,19 +18051,6 @@
     "released": 1975,
     "catNo": "6C 062 81903",
     "discogsPrice": 40.75,
-    "shelf": 7,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 529,
-    "artist": "Dr. Hook",
-    "albumTitle": "Greatest Hits",
-    "country": "UK",
-    "released": 1980,
-    "catNo": "E-ST 26037",
-    "discogsPrice": 40.5,
     "shelf": 7,
     "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
@@ -19422,19 +18681,6 @@
     "status": "available"
   },
   {
-    "id": 601,
-    "artist": "Electric Light Orchestra",
-    "albumTitle": "Time",
-    "country": "Europe",
-    "released": 1981,
-    "catNo": "JETLP 236",
-    "discogsPrice": 32.25,
-    "shelf": 7,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 628,
     "artist": "Elvis Presley",
     "albumTitle": "50,000,000 Elvis Fans Can't Be Wrong (Elvis' Gold Records, Vol. 2)",
@@ -19474,19 +18720,6 @@
     "status": "available"
   },
   {
-    "id": 654,
-    "artist": "Elvis Presley",
-    "albumTitle": "Blue Hawaii",
-    "country": "Germany",
-    "released": 1985,
-    "catNo": "NL83683",
-    "discogsPrice": 141.5,
-    "shelf": 8,
-    "genres": "Rock, Pop, Stage & Screen",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 631,
     "artist": "Elvis Presley",
     "albumTitle": "Can't Help Falling In Love",
@@ -19507,19 +18740,6 @@
     "released": 1980,
     "catNo": "CDS 1188",
     "discogsPrice": 40.25,
-    "shelf": 8,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 637,
-    "artist": "Elvis Presley",
-    "albumTitle": "Double Dynamite! Vol. 1",
-    "country": "UK",
-    "released": 1980,
-    "catNo": "CDS 1182",
-    "discogsPrice": 49.5,
     "shelf": 8,
     "genres": "Rock",
     "format": "Vinyl 12\"",
@@ -19598,19 +18818,6 @@
     "released": 1968,
     "catNo": "LSP-3921",
     "discogsPrice": 51,
-    "shelf": 8,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 649,
-    "artist": "Elvis Presley",
-    "albumTitle": "Elvis' Golden Records Volume 1",
-    "country": "Germany",
-    "released": null,
-    "catNo": "LSP 1707",
-    "discogsPrice": 40,
     "shelf": 8,
     "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
@@ -20566,19 +19773,6 @@
     "status": "available"
   },
   {
-    "id": 759,
-    "artist": "Gary Burton",
-    "albumTitle": "Reunion",
-    "country": "Switzerland",
-    "released": 1990,
-    "catNo": "GRP-9598-1",
-    "discogsPrice": 116.5,
-    "shelf": 9,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 760,
     "artist": "Gary Foster",
     "albumTitle": "Grand Cru Classé",
@@ -20586,19 +19780,6 @@
     "released": 1973,
     "catNo": "Revelation 19",
     "discogsPrice": 118.25,
-    "shelf": 9,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 772,
-    "artist": "George Benson",
-    "albumTitle": "Giblet Gravy",
-    "country": "Europe",
-    "released": 2013,
-    "catNo": "600753458952",
-    "discogsPrice": 690,
     "shelf": 9,
     "genres": "Jazz",
     "format": "Vinyl 12\"",
@@ -20625,19 +19806,6 @@
     "released": 1959,
     "catNo": "UAL 3027",
     "discogsPrice": 88.25,
-    "shelf": 10,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 784,
-    "artist": "Gerry Mulligan And His Sextet",
-    "albumTitle": "Mainstream Of Jazz",
-    "country": "US",
-    "released": null,
-    "catNo": "MG 36101",
-    "discogsPrice": 65.75,
     "shelf": 10,
     "genres": "Jazz",
     "format": "Vinyl 12\"",
@@ -20690,19 +19858,6 @@
     "released": 1975,
     "catNo": "PXM 1-8026",
     "discogsPrice": 38.75,
-    "shelf": 10,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 844,
-    "artist": "Hank Jones",
-    "albumTitle": "The Talented Touch",
-    "country": "Spain",
-    "released": 2012,
-    "catNo": "771807",
-    "discogsPrice": 185.5,
     "shelf": 10,
     "genres": "Jazz",
     "format": "Vinyl 12\"",
@@ -21190,19 +20345,6 @@
     "status": "available"
   },
   {
-    "id": 1156,
-    "artist": "Lee Konitz",
-    "albumTitle": "Lee Konitz, Chet Baker, Keith Jarret Quintet",
-    "country": "Italy",
-    "released": null,
-    "catNo": "♩C 113",
-    "discogsPrice": 353,
-    "shelf": 14,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1158,
     "artist": "Lee Konitz Nonet",
     "albumTitle": "Yes, Yes, Nonet",
@@ -21450,45 +20592,6 @@
     "status": "available"
   },
   {
-    "id": 1252,
-    "artist": "Louis Armstrong",
-    "albumTitle": "The Greatest Hits",
-    "country": "UK",
-    "released": 1985,
-    "catNo": "NE 1306",
-    "discogsPrice": 57.5,
-    "shelf": 15,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1260,
-    "artist": "Louis Armstrong And His All-Stars",
-    "albumTitle": "Stars",
-    "country": "France",
-    "released": null,
-    "catNo": "SJS-1262",
-    "discogsPrice": 53.25,
-    "shelf": 15,
-    "genres": "Jazz, Blues",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1259,
-    "artist": "Louis Armstrong And His All-Stars",
-    "albumTitle": "Stars",
-    "country": "Germany",
-    "released": null,
-    "catNo": "COPS 3319",
-    "discogsPrice": 36,
-    "shelf": 15,
-    "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1262,
     "artist": "Louis Bellson",
     "albumTitle": "Louie Bellson Jam",
@@ -21654,19 +20757,6 @@
     "discogsPrice": 78.75,
     "shelf": 17,
     "genres": "Jazz",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2410,
-    "artist": "One Two",
-    "albumTitle": "Hvide Løgne",
-    "country": "Denmark",
-    "released": 1989,
-    "catNo": "MDLP 6340",
-    "discogsPrice": 48,
-    "shelf": 17,
-    "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
     "status": "available"
   },
@@ -22308,32 +21398,6 @@
     "status": "available"
   },
   {
-    "id": 1850,
-    "artist": "Ted Nugent",
-    "albumTitle": "Nugent",
-    "country": "Europe",
-    "released": 1982,
-    "catNo": "ATL K 50 898",
-    "discogsPrice": 62,
-    "shelf": 22,
-    "genres": "Rock",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 1857,
-    "artist": "Terry Jacks",
-    "albumTitle": "Seasons In The Sun",
-    "country": "US",
-    "released": 1974,
-    "catNo": "BELL 1307",
-    "discogsPrice": 35.5,
-    "shelf": 22,
-    "genres": "Rock, Pop",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
     "id": 1898,
     "artist": "The Brecker Brothers",
     "albumTitle": "Detente",
@@ -22668,19 +21732,6 @@
     "discogsPrice": 60.5,
     "shelf": 25,
     "genres": "Rock, Funk / Soul",
-    "format": "Vinyl 12\"",
-    "status": "available"
-  },
-  {
-    "id": 2118,
-    "artist": "The Supremes",
-    "albumTitle": "Greatest Hits Volume 2",
-    "country": "Netherlands",
-    "released": 1969,
-    "catNo": "5C 062-90777",
-    "discogsPrice": 39.5,
-    "shelf": 25,
-    "genres": "Funk / Soul",
     "format": "Vinyl 12\"",
     "status": "available"
   },
