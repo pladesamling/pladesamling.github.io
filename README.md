@@ -34,15 +34,22 @@ På grund af browsernes sikkerhedsregler kan `index.html` ikke åbnes direkte fr
 
 ## Priser
 
-Den viste pris beregnes og afrundes pr. plade efter basisrabatten på 15 %. Kurvens subtotal er summen af de samme viste priser. Mængderabatten beregnes derefter på subtotalen:
+Den faste pris i `priceNow` kommer fra Excel-kolonnen **Pris nu**. Discogs-prisen vises overstreget og indgår ikke i beregningen. Mængderabatten trækkes fra summen af de faste priser, og resultatet afrundes til nærmeste hele krone:
 
-- 5–9 plader: 10 %
-- 10–19 plader: 15 %
-- 20+ plader: 22,5 %
+- 10–24 plader: 10 %
+- 25–49 plader: 15 %
+- 50–99 plader: 20 %
+- 100+ plader: 25 %
+
+Afhentning er gratis. Forsendelse lægger 65 kr. til efter mængderabatten; levering vælges ved bestilling.
+
+Kurven foreslår op til tre tilgængelige plader af samme kunstner eller med tæt matchende genrer. Udgivelsesår hjælper med rangeringen. Ved ét manglende eksemplar til næste rabattrin prioriteres billige plader inden for samme relevansgruppe. En besked om samme eller lavere pris beregnes altid med den konkrete foreslåede plade og gælder pladernes total før fragt.
+
+Katalogopdateringen bevarer eksisterende plade-ID'er. `previousIds` bruges kun til at flytte gemte kurve fra to identiske dubletter til den tilbageværende kopi. Nye plader skal have ID'er over det hidtidige maksimum; Excel-kolonnen **No** er ikke et website-ID.
 
 ## Bestillinger
 
-Køberen udfylder kontaktoplysninger og får genereret en bestillingstekst til email. Teksten indeholder pladens ID, katalognummer, land, år og hylde, så dubletter kan skelnes. Kurven ryddes først, når køberen vælger **Jeg har sendt – ryd kurven**.
+Køberen udfylder kontaktoplysninger og får genereret en bestillingstekst til email. Teksten indeholder pladens ID, katalognummer, land, år og hylde, så dubletter kan skelnes. Kurven ryddes først, når køberen vælger **Jeg har sendt – ryd kurven**. På mobil er knappen til en forudfyldt email tilgængelig uanset bestillingens længde. Kopiér-knappen er altid tilgængelig som alternativ. Computer bruger fortsat kopiér-knappen.
 
 ## Test
 

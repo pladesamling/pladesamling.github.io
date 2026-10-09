@@ -3,13 +3,13 @@
 // =============================================
 // Constants
 // =============================================
-const BASELINE_DISCOUNT = 0.15;
 const VOLUME_TIERS = [
-  { min: 20, discount: 0.225 },
-  { min: 10, discount: 0.15 },
-  { min: 5, discount: 0.10 },
-  { min: 1, discount: 0 }
+  { min: 100, discount: 0.25 },
+  { min: 50, discount: 0.20 },
+  { min: 25, discount: 0.15 },
+  { min: 10, discount: 0.10 }
 ];
+const SHIPPING_FEE_ORE = 6500;
 const PAGE_SIZE = 48;
 const ORDER_EMAIL = 'mellemvej12@gmail.com';
 const BASKET_STORAGE_KEY = 'pladesamling_basket';
@@ -47,10 +47,8 @@ function priceToOre(value) {
   return Number.isFinite(price) ? Math.round(price * 100) : 0;
 }
 
-function getDisplayPriceOre(discogsPrice) {
-  const discountedOre = priceToOre(discogsPrice) * (1 - BASELINE_DISCOUNT);
-  // Cards show whole kroner, so every item is rounded before basket totals are added.
-  return Math.round(discountedOre / 100) * 100;
+function getDisplayPriceOre(vinyl) {
+  return priceToOre(vinyl.priceNow);
 }
 
 function formatPriceOre(ore) {
@@ -85,21 +83,71 @@ function formatDiscountPct(discount) {
   }) + '%';
 }
 
-function calculateOrder(items) {
+function calculateOrder(items, delivery = 'Afhentning ønsket') {
   const discogsTotalOre = items.reduce((sum, vinyl) => sum + priceToOre(vinyl.discogsPrice), 0);
-  const baseSubtotalOre = items.reduce((sum, vinyl) => sum + getDisplayPriceOre(vinyl.discogsPrice), 0);
-  const baseDiscountOre = discogsTotalOre - baseSubtotalOre;
+  const baseSubtotalOre = items.reduce((sum, vinyl) => sum + getDisplayPriceOre(vinyl), 0);
   const volumeDiscount = getVolumeDiscount(items.length);
-  const volumeAmountOre = Math.round(baseSubtotalOre * volumeDiscount);
+  const subtotalOre = Math.round(baseSubtotalOre * (1 - volumeDiscount) / 100) * 100;
+  const volumeAmountOre = baseSubtotalOre - subtotalOre;
+  const shippingOre = items.length && delivery === 'Forsendelse ønsket' ? SHIPPING_FEE_ORE : 0;
 
   return {
     discogsTotalOre,
     baseSubtotalOre,
-    baseDiscountOre,
     volumeDiscount,
     volumeAmountOre,
-    totalOre: baseSubtotalOre - volumeAmountOre
+    subtotalOre,
+    shippingOre,
+    totalOre: subtotalOre + shippingOre
   };
+}
+
+function recommendationKey(value) {
+  return String(value || '').normalize('NFKC').trim().toLocaleLowerCase('da-DK');
+}
+
+function getBasketRecommendations(items, catalogue = allVinyls) {
+  if (!items.length) return [];
+  const selected = new Set(items.map(item => Number(item.id)));
+  const albums = new Set(items.map(item => `${recommendationKey(item.artist)}|${recommendationKey(item.albumTitle)}`));
+  const nextTier = getNextTier(items.length);
+  const suggestions = [];
+  for (const vinyl of catalogue) {
+    if (getVinylStatus(vinyl) !== 'available' || selected.has(Number(vinyl.id)) ||
+      albums.has(`${recommendationKey(vinyl.artist)}|${recommendationKey(vinyl.albumTitle)}`)) continue;
+    const genres = getGenres(vinyl);
+    let best = null;
+    for (const item of items) {
+      if (getFormat(vinyl) !== getFormat(item)) continue;
+      const artist = recommendationKey(vinyl.artist);
+      const sameArtist = artist && !['various', 'various artists', 'unknown', 'ukendt kunstner'].includes(artist) && artist === recommendationKey(item.artist);
+      const itemGenres = getGenres(item);
+      const shared = genres.filter(genre => itemGenres.includes(genre));
+      const similarity = shared.length / new Set([...genres, ...itemGenres]).size;
+      // A broad overlapping tag alone is insufficient for a musical recommendation.
+      if (!sameArtist && !(shared.length && similarity >= 0.75)) continue;
+      const years = [Number(vinyl.released), Number(item.released)];
+      const yearBonus = years.every(year => Number.isFinite(year) && year > 0)
+        ? Math.max(0, 10 - Math.abs(years[0] - years[1])) : 0;
+      const score = (sameArtist ? 100 : 40 + similarity * 20) + yearBonus;
+      const reason = sameArtist ? `Mere med ${item.artist}` : `${shared.join(' / ')} som i din kurv`;
+      if (!best || score > best.score) best = { vinyl, score, reason };
+    }
+    if (best) suggestions.push(best);
+  }
+  suggestions.sort((a, b) => {
+    const priceDiff = getDisplayPriceOre(a.vinyl) - getDisplayPriceOre(b.vinyl);
+    // Near a tier, prefer affordable options within the same relevance group.
+    const artistDiff = Number(b.score >= 100) - Number(a.score >= 100);
+    return artistDiff || (nextTier?.needed === 1 ? priceDiff : 0) || b.score - a.score || priceDiff || Number(a.vinyl.id) - Number(b.vinyl.id);
+  });
+  const seen = new Set();
+  return suggestions.filter(({ vinyl }) => {
+    const key = `${recommendationKey(vinyl.artist)}|${recommendationKey(vinyl.albumTitle)}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 3);
 }
 
 function getGenres(vinyl) {
@@ -166,9 +214,16 @@ async function init() {
       if (!VALID_STATUSES.has(status)) {
         throw new Error(`Ugyldig status for plade #${vinyl.id}: ${vinyl.status}`);
       }
+      if (!Number.isInteger(vinyl.priceNow) || vinyl.priceNow <= 0) {
+        throw new Error(`Ugyldig pris for plade #${vinyl.id}`);
+      }
     }
     allVinyls = raw.filter(vinyl => getVinylStatus(vinyl) === 'available');
     vinylById = new Map(allVinyls.map(vinyl => [Number(vinyl.id), vinyl]));
+    const previousIds = new Map(allVinyls.flatMap(vinyl =>
+      (vinyl.previousIds || []).map(id => [Number(id), Number(vinyl.id)])));
+    basket = basket.map(id => vinylById.has(Number(id)) ? id : previousIds.get(Number(id)) || id);
+    saveBasket();
     reconcileBasket();
     populateFilters();
     updateCatalogueStats();
@@ -215,7 +270,6 @@ function updateCatalogueStats() {
   document.getElementById('recordCount').textContent = allVinyls.length.toLocaleString('da-DK');
   document.getElementById('genreCount').textContent = genres.size.toLocaleString('da-DK');
   document.getElementById('artistCount').textContent = artists.size.toLocaleString('da-DK');
-  document.getElementById('yearRange').textContent = yearRange;
   document.getElementById('heroYearRange').textContent = yearRange;
 }
 
@@ -301,10 +355,10 @@ function filterAndSort() {
 
   switch (sort) {
     case 'price-asc':
-      filteredVinyls.sort((a, b) => getDisplayPriceOre(a.discogsPrice) - getDisplayPriceOre(b.discogsPrice) || byArtistThenTitle(a, b));
+      filteredVinyls.sort((a, b) => getDisplayPriceOre(a) - getDisplayPriceOre(b) || byArtistThenTitle(a, b));
       break;
     case 'price-desc':
-      filteredVinyls.sort((a, b) => getDisplayPriceOre(b.discogsPrice) - getDisplayPriceOre(a.discogsPrice) || byArtistThenTitle(a, b));
+      filteredVinyls.sort((a, b) => getDisplayPriceOre(b) - getDisplayPriceOre(a) || byArtistThenTitle(a, b));
       break;
     case 'year-asc':
       filteredVinyls.sort((a, b) => (Number(a.released) || 9999) - (Number(b.released) || 9999) || byArtistThenTitle(a, b));
@@ -373,7 +427,7 @@ function renderCard(vinyl) {
   const genres = getGenres(vinyl);
   const format = getFormat(vinyl);
   const genreDisplay = genres.map(value => `<span class="card-genre">${escapeHtml(value)}</span>`).join('');
-  const displayPriceOre = getDisplayPriceOre(vinyl.discogsPrice);
+  const displayPriceOre = getDisplayPriceOre(vinyl);
   const inBasket = basket.includes(id);
   const meta = [format, year, country].filter(Boolean).join(' · ');
 
@@ -393,8 +447,11 @@ function renderCard(vinyl) {
   </div>
   <div class="card-footer">
     <span class="card-price-wrap">
-      <span class="card-price-label">Efter 15% rabat</span>
-      <span class="card-price">${formatPriceOre(displayPriceOre)}</span>
+      <span class="card-reference-price">Discogs <s>${formatPriceOre(priceToOre(vinyl.discogsPrice))}</s></span>
+      <span class="card-current-price">
+        <span class="card-price-label">Pris nu</span>
+        <span class="card-price">${formatPriceOre(displayPriceOre)}</span>
+      </span>
     </span>
     <button class="btn-primary${inBasket ? ' in-basket' : ''}" type="button" data-action="${inBasket ? 'remove' : 'add'}" data-id="${id}"${inBasket ? ' aria-label="Fjern fra kurv" title="Klik for at fjerne fra kurven"' : ''}>${inBasket ? 'I kurven ✓' : 'Læg i kurv'}</button>
   </div>
@@ -446,16 +503,31 @@ function clearBasket() {
   renderCatalogue();
 }
 
+function updateCatalogueDiscountStatus(count) {
+  const element = document.getElementById('catalogueDiscountStatus');
+  element.hidden = catalogueLoadError;
+  const nextTier = getNextTier(count);
+  const discount = getVolumeDiscount(count);
+  const hint = nextTier
+    ? `${nextTier.needed} ${nextTier.needed === 1 ? 'plade' : 'plader'} til ${formatDiscountPct(nextTier.discount)}`
+    : 'Største rabat nået';
+  const target = nextTier ? count + nextTier.needed : 100;
+  element.innerHTML = `<strong class="catalogue-active-discount">${discount ? `${formatDiscountPct(discount)} mængderabat aktiveret` : ''}</strong>
+    <progress class="discount-progress" value="${Math.min(count, target)}" max="${target}" aria-label="${nextTier ? `${count} af ${target} plader til næste rabattrin` : 'Største rabat nået'}"></progress>
+    <span class="catalogue-next-discount">${hint}</span>`;
+}
+
 function updateBasketUI() {
   const items = resolveBasketItems();
   const count = items.length;
   document.getElementById('basketCount').textContent = count;
+  updateCatalogueDiscountStatus(count);
 
   const body = document.getElementById('basketBody');
   const footer = document.getElementById('basketFooter');
 
   if (count === 0) {
-    body.innerHTML = '<p class="basket-empty">Din kurv er tom</p>';
+    body.innerHTML = '<p class="basket-empty">Din kurv er tom<br>Tag 10 plader med og få 10 % på pladerne.</p>';
     footer.innerHTML = '';
     return;
   }
@@ -465,27 +537,52 @@ function updateBasketUI() {
   <div class="basket-item-info">
     <div class="basket-item-artist">${escapeHtml(vinyl.artist || '')}</div>
     <div class="basket-item-title">${escapeHtml(vinyl.albumTitle || '')}</div>
-    <div class="basket-item-price">${formatPriceOre(getDisplayPriceOre(vinyl.discogsPrice))}</div>
+    <div class="basket-item-price">${formatPriceOre(getDisplayPriceOre(vinyl))}</div>
   </div>
   <button class="basket-remove" type="button" data-action="remove" data-id="${Number(vinyl.id)}" aria-label="Fjern ${escapeHtml(vinyl.artist || '')} – ${escapeHtml(vinyl.albumTitle || '')} fra kurven">×</button>
 </div>`.trim()).join('');
 
   const totals = calculateOrder(items);
   const nextTier = getNextTier(count);
+  const recommendations = getBasketRecommendations(items);
+  if (recommendations.length) {
+    body.innerHTML += `<section class="basket-recommendations" aria-label="Plader der passer til din kurv">
+      <h3>Passer til din kurv</h3>
+      ${nextTier?.needed === 1 ? `<p class="recommendation-tier-note">Tilføj én valgfri plade, og få ${formatDiscountPct(nextTier.discount)} på alle pladerne i kurven.</p>` : ''}
+      ${recommendations.map(({ vinyl, reason }) => {
+        const nextTotal = calculateOrder([...items, vinyl]);
+        const saving = totals.subtotalOre - nextTotal.subtotalOre;
+        const benefit = nextTier?.needed === 1
+          ? `<p class="recommendation-benefit"><span>Ny total for pladerne: ${formatPriceOre(nextTotal.subtotalOre)}</span><span>${saving > 0 ? `${formatPriceOre(saving)} mindre end nu` : saving < 0 ? `${formatPriceOre(-saving)} mere end nu` : 'Samme pris som nu'}.</span></p>` : '';
+        return `<div class="basket-item recommendation" data-recommendation-id="${Number(vinyl.id)}">
+          <div class="basket-item-info">
+            <div class="basket-item-artist">${escapeHtml(vinyl.artist)}</div>
+            <div class="basket-item-title">${escapeHtml(vinyl.albumTitle)}</div>
+            <p class="recommendation-reason">${escapeHtml(reason)}</p>
+            <div class="basket-item-price">${formatPriceOre(getDisplayPriceOre(vinyl))}</div>
+            ${benefit}
+          </div>
+          <button class="btn-secondary" type="button" data-action="add" data-id="${Number(vinyl.id)}" aria-label="Læg ${escapeHtml(vinyl.artist)} – ${escapeHtml(vinyl.albumTitle)} i kurv">Tilføj</button>
+        </div>`;
+      }).join('')}
+    </section>`;
+  }
   let footerHtml = '';
 
   if (totals.volumeDiscount > 0) {
     footerHtml += `<p class="discount-active">${formatDiscountPct(totals.volumeDiscount)} mængderabat aktiveret</p>`;
   }
   if (nextTier) {
-    footerHtml += `<p class="discount-hint">Tilføj ${nextTier.needed} ${nextTier.needed === 1 ? 'plade' : 'plader'} mere for ${formatDiscountPct(nextTier.discount)} rabat</p>`;
+    const target = count + nextTier.needed;
+    footerHtml += `<progress class="discount-progress" value="${count}" max="${target}" aria-label="${count} af ${target} plader til næste rabattrin"></progress>`;
+    footerHtml += `<p class="discount-hint">Tilføj ${nextTier.needed} ${nextTier.needed === 1 ? 'plade' : 'plader'} mere, og få ${formatDiscountPct(nextTier.discount)} på alle pladerne</p>`;
   }
 
   footerHtml += `<div class="price-breakdown">
-  <div class="price-row"><span>Discogs-pris i alt</span><span>${formatPriceOre(totals.discogsTotalOre)}</span></div>
-  <div class="price-row"><span>Basisrabat (−15%)</span><span>−${formatPriceOre(totals.baseDiscountOre)}</span></div>
+  <div class="price-row"><span>Sum af priser</span><span>${formatPriceOre(totals.baseSubtotalOre)}</span></div>
   ${totals.volumeDiscount > 0 ? `<div class="price-row"><span>Mængderabat (${formatDiscountPct(totals.volumeDiscount)})</span><span>−${formatPriceOre(totals.volumeAmountOre)}</span></div>` : ''}
   <div class="price-row total"><span>Total</span><span>${formatPriceOre(totals.totalOre)}</span></div>
+  <p class="delivery-note">Afhentning gratis · Forsendelse +65 kr.</p>
 </div>
 <button class="btn-primary btn-full" type="button" data-action="checkout">Gå til bestilling</button>`;
 
@@ -556,11 +653,15 @@ function openCheckout(returnTarget = document.activeElement) {
   document.getElementById('checkoutForm').reset();
   clearValidation();
   document.getElementById('copyConfirm').hidden = true;
-  const items = resolveBasketItems();
-  const totals = calculateOrder(items);
-  document.getElementById('checkoutSummary').textContent = `${formatRecordCount(items.length)} · Total ${formatPriceOre(totals.totalOre)}`;
+  updateCheckoutSummary();
   syncBodyScrollLock();
   document.getElementById('closeCheckoutBtn').focus();
+}
+
+function updateCheckoutSummary() {
+  const items = resolveBasketItems();
+  const totals = calculateOrder(items, document.getElementById('fieldLevering').value);
+  document.getElementById('checkoutSummary').textContent = `${formatRecordCount(items.length)} · Total ${formatPriceOre(totals.totalOre)}`;
 }
 
 function closeCheckout(shouldRestoreFocus = true) {
@@ -640,7 +741,7 @@ function validateCheckoutForm() {
 
 function generateOrderText(name, email, phone, delivery, message) {
   const items = resolveBasketItems();
-  const totals = calculateOrder(items);
+  const totals = calculateOrder(items, delivery);
 
   const itemLines = items.map(vinyl => {
     const details = [
@@ -650,13 +751,12 @@ function generateOrderText(name, email, phone, delivery, message) {
       vinyl.shelf != null && vinyl.shelf !== '' ? `Hylde ${vinyl.shelf}` : null
     ].filter(Boolean).join(' · ');
 
-    return `  #${vinyl.id} · ${vinyl.artist || '?'} — ${vinyl.albumTitle || '?'}\n    ${details}\n    Discogs-pris ${formatPriceOre(priceToOre(vinyl.discogsPrice))} → ${formatPriceOre(getDisplayPriceOre(vinyl.discogsPrice))}`;
+    return `  #${vinyl.id} · ${vinyl.artist || '?'} — ${vinyl.albumTitle || '?'}\n    ${details}\n    Discogs-pris ${formatPriceOre(priceToOre(vinyl.discogsPrice))} → ${formatPriceOre(getDisplayPriceOre(vinyl))}`;
   }).join('\n\n');
 
   const volumeLine = totals.volumeDiscount > 0
     ? `Mængderabat (${formatDiscountPct(totals.volumeDiscount)}):   −${formatPriceOre(totals.volumeAmountOre)}`
     : null;
-  const separator = '────────────────────────────';
 
   const lines = [
     `Emne: Ny bestilling fra ${name} — ${formatRecordCount(items.length)}, ${formatPriceOre(totals.totalOre)}`,
@@ -667,12 +767,12 @@ function generateOrderText(name, email, phone, delivery, message) {
     '',
     itemLines,
     '',
-    separator,
-    `Discogs-pris i alt:    ${formatPriceOre(totals.discogsTotalOre)}`,
-    `Basisrabat (−15%):    −${formatPriceOre(totals.baseDiscountOre)}`,
+    '────────────────────────────',
+    `Sum af priser:         ${formatPriceOre(totals.baseSubtotalOre)}`,
     ...(volumeLine ? [volumeLine] : []),
+    `Fragt:                 ${formatPriceOre(totals.shippingOre)}`,
     `Total:                 ${formatPriceOre(totals.totalOre)}`,
-    separator,
+    '────────────────────────────',
     '',
     `Levering: ${delivery}`,
     ...(message ? ['', 'Besked:', message] : []),
@@ -698,17 +798,21 @@ function updateOrderActionUi() {
   const desktopAction = document.getElementById('orderActionBtn');
   const emailAction = document.getElementById('emailOrderLink');
   const copyFallback = document.getElementById('copyOrderBtn');
+  const emailHref = buildOrderEmailHref();
+  const canOpenEmail = isPhone;
 
-  desktopAction.hidden = isPhone;
-  emailAction.hidden = !isPhone;
-  emailAction.href = buildOrderEmailHref();
-  copyFallback.hidden = !isPhone;
-  document.getElementById('orderInstructionsPrefix').textContent = isPhone
+  desktopAction.hidden = canOpenEmail;
+  emailAction.hidden = !canOpenEmail;
+  if (canOpenEmail) emailAction.href = emailHref;
+  else emailAction.removeAttribute('href');
+  copyFallback.hidden = !canOpenEmail;
+  document.getElementById('orderInstructionsPrefix').textContent = canOpenEmail
     ? 'Åbn en ny email til '
     : 'Kopiér teksten og send den som en email til ';
-  document.getElementById('orderInstructionsSuffix').textContent = isPhone
+  document.getElementById('orderInstructionsSuffix').textContent = canOpenEmail
     ? ' med modtager, emne og bestilling udfyldt. Hvis der ikke åbnes en emailapp, kan du kopiere teksten i stedet. Din kurv gemmes, indtil du selv rydder den efter afsendelse.'
     : '. Din kurv gemmes, indtil du selv rydder den efter afsendelse.';
+  return canOpenEmail ? emailAction : desktopAction;
 }
 
 function buildOrderEmailHref() {
@@ -797,8 +901,9 @@ function bindEvents() {
   });
 
   document.getElementById('basketBody').addEventListener('click', event => {
-    const action = event.target.closest('[data-action="remove"]');
-    if (action) removeFromBasket(action.dataset.id);
+    const action = event.target.closest('[data-action]');
+    if (action?.dataset.action === 'remove') removeFromBasket(action.dataset.id);
+    if (action?.dataset.action === 'add') addToBasket(action.dataset.id);
   });
 
   document.getElementById('basketFooter').addEventListener('click', event => {
@@ -815,6 +920,7 @@ function bindEvents() {
     if (event.target === event.currentTarget) closeCheckout();
   });
   PHONE_ORDER_ACTION_MEDIA.addEventListener('change', updateOrderActionUi);
+  document.getElementById('fieldLevering').addEventListener('change', updateCheckoutSummary);
 
   ['fieldNavn', 'fieldEmail', 'fieldMobil'].forEach(id => {
     document.getElementById(id).addEventListener('input', event => {
@@ -836,8 +942,7 @@ function bindEvents() {
     document.getElementById('orderText').value = generateOrderText(name, email, phone, delivery, message);
     event.currentTarget.style.display = 'none';
     document.getElementById('orderResult').style.display = '';
-    updateOrderActionUi();
-    document.getElementById(shouldUsePhoneOrderAction() ? 'emailOrderLink' : 'orderActionBtn').focus();
+    updateOrderActionUi().focus();
   });
 
   document.getElementById('orderActionBtn').addEventListener('click', () => copyOrderText());

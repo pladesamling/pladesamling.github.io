@@ -36,7 +36,9 @@
       <p class="hero-eyebrow">EN LIVSLANG SAMLING · <span id="heroYearRange">1954–2024</span></p>
       <h1 class="hero-title">LP'er der fortjener et nyt hjem</h1>
       <p class="hero-body">
-        Bo samlede og lyttede bredt gennem et langt liv — fra jazz og klassisk musik til soul, dansktop og rock. Her finder du <span id="artistCount">1.041</span> kunstnere, hvis plader nu kan få et nyt hjem.
+        <span class="hero-text-line">Bo samlede og lyttede bredt gennem et langt liv — fra jazz og klassisk musik til soul,</span>
+        <span class="hero-text-line">dansktop og rock. Her finder du <span id="artistCount">1.041</span> kunstnere, hvis plader nu kan få et nyt hjem.</span>
+        <span class="hero-text-line">Faste, lave priser, og jo flere du tager med, jo billigere bliver det.</span>
       </p>
       <p class="hero-shipping">
         Afhentning er gratis, eller vi sender mod betaling af porto — pakker sendes hver søndag.
@@ -50,30 +52,35 @@
           <span class="stat-num" id="genreCount">15</span>
           <span class="stat-label">genrer</span>
         </div>
-        <div class="stat">
-          <span class="stat-num" id="yearRange">1954–2024</span>
-          <span class="stat-label">årgange</span>
+        <div class="stat stat-sold">
+          <span class="stat-num">1.700+</span>
+          <span class="stat-label">plader har fundet et nyt hjem</span>
         </div>
       </div>
       <p class="hero-disclaimer">
-        Priser er sat ned i forhold til Discogs vinter 2024, og der er automatisk mængderabat i kurven.
+        Priserne er sat langt ned i forhold til Discogs vinter 2024. Tag 10 plader med og få 10 % på hele bestillingen, op til 25 % ved 100 plader.
       </p>
-      <a class="btn-secondary hero-cta" href="#catalogue">Se pladerne</a>
     </div>
   </section>
 
   <!-- CATALOGUE -->
   <section class="catalogue" id="catalogue">
     <div class="catalogue-inner">
+      <aside class="discount-banner" aria-label="Mængderabat på plader">
+        <strong>Jo flere plader, jo billigere</strong>
+        <p>Mængderabatten gælder hele din bestilling og regnes ud i kurven.</p>
+        <div class="discount-steps">
+          <div class="discount-step"><b>10 %</b><span>fra 10 plader</span></div>
+          <div class="discount-step"><b>15 %</b><span>fra 25 plader</span></div>
+          <div class="discount-step"><b>20 %</b><span>fra 50 plader</span></div>
+          <div class="discount-step"><b>25 %</b><span>fra 100 plader</span></div>
+        </div>
+      </aside>
       <div class="catalogue-heading">
         <p class="section-eyebrow">KATALOGET</p>
         <h2>Find din næste plade</h2>
         <p>Søg blandt hele samlingen, eller gå på opdagelse efter format, genre, land og årti.</p>
       </div>
-      <aside class="discount-banner" aria-label="Rabat på alle plader">
-        <strong><span>15%</span> rabat på alle plader</strong>
-        <p>Priserne i kataloget er allerede fratrukket rabatten. Køber du 5 eller flere, får du også mængderabat.</p>
-      </aside>
       <div class="catalogue-tools">
           <div class="catalogue-controls">
             <div class="search-bar">
@@ -121,6 +128,7 @@
         </div>
         <div class="catalogue-meta-row">
           <p class="result-count" id="resultCount" aria-live="polite"></p>
+          <div class="catalogue-discount-status" id="catalogueDiscountStatus" role="status" aria-live="polite" hidden></div>
           <button class="view-toggle" id="detailedViewBtn" type="button" aria-pressed="false" aria-controls="vinylGrid">
             Detaljeret visning
           </button>
@@ -153,7 +161,7 @@
       </div>
       <div class="footer-shipping">Pakker sendes hver søndag</div>
       <div class="footer-discounts">
-        5–9 plader: 10% &nbsp;·&nbsp; 10–19 plader: 15% &nbsp;·&nbsp; 20+ plader: 22,5%
+        10–24 plader: 10% &nbsp;·&nbsp; 25–49: 15% &nbsp;·&nbsp; 50–99: 20% &nbsp;·&nbsp; 100+: 25%
       </div>
     </div>
   </footer>
@@ -197,8 +205,8 @@
           <div class="form-group">
             <label for="fieldLevering">Levering</label>
             <select id="fieldLevering" name="levering">
-              <option value="Afhentning ønsket">Afhentning ønsket</option>
-              <option value="Forsendelse ønsket">Forsendelse ønsket</option>
+              <option value="Afhentning ønsket">Afhentning ønsket – gratis</option>
+              <option value="Forsendelse ønsket">Forsendelse ønsket – 65 kr.</option>
             </select>
           </div>
           <div class="form-group">

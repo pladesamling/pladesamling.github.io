@@ -207,11 +207,11 @@ a:focus-visible {
    Hero
    ============================================= */
 .hero {
-  padding: 64px 24px 52px;
+  padding: 64px 24px 18px;
   text-align: center;
 }
 .hero-inner {
-  max-width: 720px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 .hero-eyebrow {
@@ -229,7 +229,6 @@ a:focus-visible {
   color: var(--text);
 }
 .hero-body {
-  max-width: 65ch;
   margin: 0 auto 12px;
   color: var(--text-body);
   font-size: 1.05rem;
@@ -240,11 +239,7 @@ a:focus-visible {
   font-size: 0.95rem;
   margin-bottom: 28px;
 }
-.hero-cta {
-  margin-top: 24px;
-  text-decoration: none;
-}
-.hero-cta:hover { text-decoration: none; }
+.hero-text-line { display: block; }
 .hero-stats {
   display: flex;
   justify-content: center;
@@ -253,6 +248,7 @@ a:focus-visible {
   flex-wrap: wrap;
 }
 .stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.stat-sold { max-width: 240px; text-align: center; }
 .stat-num {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
@@ -275,7 +271,7 @@ a:focus-visible {
    Catalogue
    ============================================= */
 .catalogue {
-  padding: 52px 24px 80px;
+  padding: 18px 24px 80px;
   scroll-margin-top: 64px;
 }
 .catalogue-inner {
@@ -301,17 +297,17 @@ a:focus-visible {
 .catalogue-heading > p:last-child { color: var(--text-muted); }
 
 .discount-banner {
-  display: flex;
-  align-items: baseline;
-  gap: 20px;
-  padding: 16px 20px;
-  margin-bottom: 16px;
+  display: block;
+  padding: 20px;
+  margin-bottom: 28px;
   color: var(--text-body);
   background: #f3dfd3;
   border: 1px solid rgba(181, 69, 27, 0.24);
   border-radius: var(--radius);
 }
 .discount-banner strong {
+  display: block;
+  margin-bottom: 6px;
   flex: 0 0 auto;
   color: var(--accent);
   font-family: 'Playfair Display', serif;
@@ -332,7 +328,7 @@ a:focus-visible {
   position: sticky;
   top: 64px;
   z-index: 90;
-  padding: 12px 0 10px;
+  padding: 12px 16px 10px;
   margin-bottom: 20px;
   background: rgba(245, 239, 230, 0.96);
   border-bottom: 1px solid var(--border);
@@ -344,6 +340,30 @@ a:focus-visible {
   gap: 10px;
   align-items: stretch;
 }
+.discount-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.discount-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.discount-step b {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.65rem;
+  line-height: 1.2;
+  color: var(--accent);
+}
+.discount-step span { font-size: 0.85rem; color: var(--text-muted); }
 .search-bar {
   min-width: 0;
 }
@@ -450,7 +470,8 @@ a:focus-visible {
   color: var(--text-muted);
 }
 .catalogue-meta-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(0, 6fr) minmax(120px, 1fr);
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -596,13 +617,15 @@ a:focus-visible {
 .vinyl-card .card-price-wrap {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  line-height: 1.15;
+  align-items: flex-start;
+  gap: 4px;
+  line-height: 1.3;
 }
+.card-current-price { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
 .vinyl-card .card-price-label {
   color: var(--text-muted);
-  font-size: 0.67rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 400;
   white-space: nowrap;
 }
 .vinyl-card .btn-primary { padding: 9px 14px; }
@@ -774,6 +797,24 @@ a:focus-visible {
   flex-shrink: 0;
 }
 .basket-remove:hover { color: var(--accent); }
+
+.card-reference-price { color: var(--text-muted); font-size: 0.78rem; }
+.discount-progress { width: 100%; height: 6px; accent-color: var(--accent); }
+.delivery-note { font-size: 0.78rem; color: var(--text-muted); }
+.basket-recommendations { border-top: 1px solid var(--border); padding-top: 16px; }
+.basket-recommendations h3 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 12px; color: var(--text); }
+.basket-recommendations .basket-item { margin-bottom: 10px; }
+.recommendation .btn-secondary { padding: 6px 10px; font-size: 0.8rem; flex-shrink: 0; }
+.recommendation .basket-item-title { white-space: normal; overflow-wrap: anywhere; }
+.recommendation-reason { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+.recommendation-benefit { font-size: 0.8rem; color: var(--accent); margin-top: 6px; }
+.recommendation-benefit span { display: block; }
+.recommendation-tier-note { font-size: 0.83rem; color: var(--text-body); margin-bottom: 12px; }
+.catalogue-discount-status { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 10px; font-size: 0.78rem; color: var(--text-muted); }
+.catalogue-discount-status strong { color: var(--accent); font-weight: 600; text-align: right; }
+.catalogue-next-discount { white-space: nowrap; }
+.catalogue-discount-status .discount-progress { width: clamp(120px, 16vw, 240px); height: 4px; flex-shrink: 0; }
+.catalogue-meta-row .view-toggle { grid-column: 3; }
 
 .basket-footer {
   padding: 16px 24px 24px;
@@ -965,13 +1006,14 @@ a:focus-visible {
   }
 }
 @media (max-width: 768px) {
-  .hero { padding: 32px 16px 30px; }
+  .hero { padding: 32px 16px 16px; }
   .hero-eyebrow { margin-bottom: 12px; }
   .hero-title { margin-bottom: 14px; }
   .hero-body { font-size: 0.98rem; line-height: 1.58; }
   .hero-shipping { margin-bottom: 22px; }
-  .hero-cta { margin-top: 20px; }
+  .hero-text-line { display: inline; }
   .hero-stats { gap: 22px; margin-bottom: 14px; }
+  .stat-sold { max-width: 140px; }
   .stat-num { font-size: 1.7rem; }
   :root { --sidebar-width: 100vw; }
   .catalogue-heading { margin-bottom: 20px; }
@@ -985,6 +1027,7 @@ a:focus-visible {
   }
   .discount-banner strong span { font-size: 1.35rem; }
   .discount-banner p { font-size: 0.86rem; }
+  .discount-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .catalogue-tools {
     margin-inline: -16px;
     padding: 10px 16px 8px;
@@ -1019,11 +1062,16 @@ a:focus-visible {
   .filter-row select { min-width: 0; font-size: 0.85rem; }
   .filter-row #sortSelectMobile { display: block; }
   .btn-reset { grid-column: 1 / -1; }
-  .catalogue-meta-row { margin-top: 6px; }
+  .catalogue-meta-row { margin-top: 6px; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; }
+  .catalogue-meta-row .view-toggle { grid-column: 2; grid-row: 1; }
+  .catalogue-discount-status { grid-column: 1 / -1; grid-row: 2; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 8px; font-size: 0.7rem; }
+  .catalogue-discount-status strong { grid-column: 1; grid-row: 1; text-align: left; white-space: nowrap; }
+  .catalogue-discount-status .catalogue-next-discount { grid-column: 2; grid-row: 1; text-align: right; }
+  .catalogue-discount-status .discount-progress { grid-column: 1 / -1; grid-row: 2; width: 100%; }
 }
 @media (max-width: 480px) {
   .header-inner { padding: 0 16px; }
-  .catalogue { padding: 40px 16px 64px; }
+  .catalogue { padding: 16px 16px 64px; }
   .vinyl-card .card-footer { align-items: flex-end; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
