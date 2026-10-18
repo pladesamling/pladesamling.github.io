@@ -23090,5 +23090,33 @@
     "format": "Vinyl 12\"",
     "priceNow": 65,
     "status": "available"
+  },
+  {
+    "id": 2512,
+    "artist": "Genesis",
+    "albumTitle": "...And Then There Were Three…",
+    "country": "Scandinavia",
+    "released": 1978,
+    "catNo": "9124 023",
+    "discogsPrice": 58.5,
+    "shelf": 9,
+    "genres": "Rock",
+    "format": "Vinyl 12\"",
+    "priceNow": 40,
+    "status": "available"
+  },
+  {
+    "id": 2513,
+    "artist": "Simply Red",
+    "albumTitle": "Stars",
+    "country": "UK & Europe",
+    "released": 1991,
+    "catNo": null,
+    "discogsPrice": 39.25,
+    "shelf": 20,
+    "genres": "Rock, Funk / Soul, Pop",
+    "format": "Vinyl 12\"",
+    "priceNow": 30,
+    "status": "available"
   }
 ]
