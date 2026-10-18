@@ -23034,5 +23034,47 @@
     "format": "Vinyl 12\"",
     "priceNow": 40,
     "status": "available"
+  },
+  {
+    "id": 2508,
+    "artist": "George Benson",
+    "albumTitle": "While The City Sleeps...",
+    "country": "US",
+    "released": 1986,
+    "catNo": "1-25475",
+    "discogsPrice": 39,
+    "shelf": 9,
+    "genres": "Electronic, Funk / Soul",
+    "format": "Vinyl 12\"",
+    "priceNow": 30,
+    "status": "available"
+  },
+  {
+    "id": 2509,
+    "artist": "Laid Back",
+    "albumTitle": "Play It Straight",
+    "country": "Netherlands",
+    "released": 1985,
+    "catNo": "MDLP 6260",
+    "discogsPrice": 37,
+    "shelf": 14,
+    "genres": "Electronic, Pop",
+    "format": "Vinyl 12\"",
+    "priceNow": 30,
+    "status": "available"
+  },
+  {
+    "id": 2510,
+    "artist": "Paul Simon",
+    "albumTitle": "There Goes Rhymin' Simon",
+    "country": "US",
+    "released": 1973,
+    "catNo": "KC 32280",
+    "discogsPrice": 39,
+    "shelf": 17,
+    "genres": "Rock",
+    "format": "Vinyl 12\"",
+    "priceNow": 30,
+    "status": "available"
   }
 ]
