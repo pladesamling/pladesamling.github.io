@@ -23076,5 +23076,19 @@
     "format": "Vinyl 12\"",
     "priceNow": 30,
     "status": "available"
+  },
+  {
+    "id": 2511,
+    "artist": "Jean-Michel Jarre",
+    "albumTitle": "Michel Jarre",
+    "country": "France",
+    "released": 1987,
+    "catNo": "824 746-1",
+    "discogsPrice": 89.25,
+    "shelf": 12,
+    "genres": "Electronic, Pop",
+    "format": "Vinyl 12\"",
+    "priceNow": 65,
+    "status": "available"
   }
 ]
