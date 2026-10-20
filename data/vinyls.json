@@ -1862,7 +1862,7 @@
     "genres": "Jazz",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 746,
@@ -3290,7 +3290,7 @@
     "genres": "Rock, Blues",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1899,
@@ -10027,7 +10027,7 @@
     "genres": "Rock, Funk / Soul, Blues",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1713,
@@ -13779,7 +13779,7 @@
     "genres": "Funk / Soul",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1344,
@@ -17265,7 +17265,7 @@
     "genres": "Blues",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1885,
@@ -18119,7 +18119,7 @@
     "genres": "Jazz",
     "format": "Vinyl 12\"",
     "priceNow": 50,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 294,
