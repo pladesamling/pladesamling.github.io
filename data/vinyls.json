@@ -2030,7 +2030,7 @@
     "genres": "Jazz",
     "format": "Vinyl 12\"",
     "priceNow": 80,
-    "status": "sold"
+    "status": "reserved"
   },
   {
     "id": 881,
@@ -18399,7 +18399,7 @@
     "genres": "Rock, Blues",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "sold"
+    "status": "reserved"
   },
   {
     "id": 482,
