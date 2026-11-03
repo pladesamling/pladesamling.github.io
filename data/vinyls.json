@@ -669,7 +669,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 80,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2455,
@@ -2478,7 +2478,7 @@
     "genres": "Jazz",
     "format": "Vinyl 12\"",
     "priceNow": 65,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1621,
@@ -3794,7 +3794,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2197,
@@ -5225,7 +5225,7 @@
     "genres": "Rock, Funk / Soul, Blues",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 862,
@@ -10447,7 +10447,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 65,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1786,
@@ -11133,7 +11133,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1600,
@@ -11161,7 +11161,7 @@
     "genres": "Jazz, Rock",
     "format": "Vinyl 12\"",
     "priceNow": 50,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1596,
@@ -11175,7 +11175,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1602,
@@ -11539,7 +11539,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1299,
@@ -11973,7 +11973,7 @@
     "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
     "priceNow": 50,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2025,
@@ -18455,7 +18455,7 @@
     "genres": "Jazz, Rock, Funk / Soul",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 487,
@@ -19407,7 +19407,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 50,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 648,
@@ -19449,7 +19449,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 50,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 639,
@@ -19477,7 +19477,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 80,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 655,
@@ -19491,7 +19491,7 @@
     "genres": "Rock, Pop, Stage & Screen",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 650,
@@ -19519,7 +19519,7 @@
     "genres": "Rock, Pop, Folk, World, & Country",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 638,
@@ -19533,7 +19533,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 647,
@@ -19575,7 +19575,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 635,
@@ -21199,7 +21199,7 @@
     "genres": "Jazz",
     "format": "Vinyl 12\"",
     "priceNow": 20,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1176,
@@ -21787,7 +21787,7 @@
     "genres": "Jazz",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1516,
@@ -21913,7 +21913,7 @@
     "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
     "priceNow": 30,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 1615,
