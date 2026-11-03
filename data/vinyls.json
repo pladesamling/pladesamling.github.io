@@ -11959,7 +11959,7 @@
     "genres": "Rock",
     "format": "Vinyl 12\"",
     "priceNow": 40,
-    "status": "available"
+    "status": "sold"
   },
   {
     "id": 2027,
@@ -11973,7 +11973,7 @@
     "genres": "Rock, Pop",
     "format": "Vinyl 12\"",
     "priceNow": 50,
-    "status": "sold"
+    "status": "available"
   },
   {
     "id": 2025,
